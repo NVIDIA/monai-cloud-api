@@ -1,0 +1,153 @@
+/*
+Copyright (c) 2021-2022, NVIDIA CORPORATION.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+@import url("w3.css");
+
+.monaiServicePanel {
+  background-color: #000;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  color: var(--text-primary-color);
+  padding: 2px;
+/* Accordion styles */
+}
+.monaiServicePanel .subtitle {
+  font-size: 14px;
+  text-decoration: underline;
+  font-weight: 500;
+  color: #000;
+  margin: 1px;
+  text-align: center;
+}
+.monaiServicePanel .tabs {
+  border-radius: 4px;
+  overflow: auto;
+  box-shadow: 0 4px 4px -2px rgba(0,0,0,0.5);
+  background: #91b9cd;
+  margin: 1rem 0;
+}
+.monaiServicePanel .tab {
+  width: 100%;
+  color: #fff;
+  overflow: hidden;
+}
+.monaiServicePanel .tab-switch {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+.monaiServicePanel .tab-label {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4em;
+  background: #16202b;
+  border-right: 1px dotted #3c5d80;
+  color: #fff;
+  font-size: 12px;
+  font-weight: normal;
+  cursor: pointer;
+/* Icon */
+}
+.monaiServicePanel .tab-label:hover {
+  background: #3e5975;
+}
+.monaiServicePanel .tab-label::after {
+  content: "❯";
+  width: 1em;
+  height: 1em;
+  text-align: center;
+  transition: all 0.35s;
+}
+.monaiServicePanel .tab-content {
+  max-height: 0;
+  padding: 0 1em;
+  background: #000;
+  transition: all 0.35s;
+  width: 90%;
+  font-size: small;
+  color: #fff;
+}
+.monaiServicePanel .tab-close {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1em;
+  font-size: 0.75em;
+  background: #2c3e50;
+  cursor: pointer;
+}
+.monaiServicePanel .tab-close:hover {
+  background: #1a252f;
+}
+.monaiServicePanel input:checked + .tab-label {
+  background: #00a4d9;
+}
+.monaiServicePanel input:checked + .tab-label::after {
+  transform: rotate(90deg);
+}
+.monaiServicePanel input:checked ~ .tab-content {
+  max-height: 100vh;
+  padding: 1em;
+}
+.monaiServicePanel .separator {
+  border: 0.01em solid #44626f;
+  width: 100%;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+.monaiServicePanel .actionInput {
+  width: 100%;
+  padding: 1px;
+  border: 1px solid #000;
+  color: #000;
+}
+.monaiServicePanel .actionButton {
+  border: 1px solid #000;
+  border-radius: 15px;
+  background-color: #00a4d9;
+  color: #000;
+  line-height: 25px;
+  padding: 10px 20px;
+  outline: none;
+  cursor: pointer;
+}
+.monaiServicePanel .actionButton:hover,
+.monaiServicePanel .actionButton:active {
+  background-color: #00a4d9;
+}
+.monaiServicePanel .actionButton:disabled {
+  background-color: var(--ui-sky-blue);
+}
+.monaiServicePanel .actionButton svg {
+  margin-right: 4px;
+  position: relative;
+  top: 2px;
+  bottom: 2px;
+}
+.scrollbar {
+  overflow-y: scroll;
+}
+#style-3::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #000;
+}
+#style-3::-webkit-scrollbar {
+  width: 6px;
+  background-color: #000;
+}
+#style-3::-webkit-scrollbar-thumb {
+  background-color: #f5f5f5;
+}
