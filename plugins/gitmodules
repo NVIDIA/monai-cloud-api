@@ -1,0 +1,3 @@
+[submodule "ohif/Viewers"]
+	path = ohif/Viewers
+	url = https://github.com/OHIF/Viewers.git
