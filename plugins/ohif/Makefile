@@ -10,11 +10,14 @@ dev: prepare
 	@echo "Building OHIF + Monai Service Plugin (local development)..."
 	cd Viewers/extensions; ln -s ../../extensions/monai-service monai-service
 	cd Viewers/modes; ln -s ../../modes/monai-service monai-service
+	cd Viewers; sed -i 's/--max_old_space_size=4096/--max_old_space_size=8192/' ./platform/app/package.json
+
 
 	cd Viewers; yarn config set workspaces-experimental true
 	cd Viewers; yarn install
 	cd Viewers; yarn run cli list
 	cd Viewers; QUICK_BUILD=true APP_CONFIG=config/monai_service.js yarn run build
+
 
 docker: prepare
 	@echo "Building Docking..."

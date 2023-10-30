@@ -128,12 +128,22 @@ export default class MonaiServicePanel extends Component {
     await this.client().cache_image(this.SeriesInstanceUID);
 
     const models = response.data;
-    const filtered = [];
-    for (const model of models) {
-      const { network_arch } = model;
-      if (network_arch === 'monai_vista3d' || network_arch === 'monai_annotation' || network_arch === 'monai_segmentation')
-        filtered.push(model);
-    }
+    // const filtered = [];
+    // for (const model of models) {
+    //   const { network_arch, inference_dataset } = model;
+    //   if (network_arch === 'monai_vista3d' || network_arch === 'monai_annotation' || network_arch === 'monai_segmentation') {
+    //     if (inference_dataset === this.dataset_id) {
+    //       filtered.push(model);
+    //     }
+    //   }
+    // }
+    const dataset_id = window.config.datasetId ? window.config.datasetId : window.config.monaiService.datasetId;
+    const filtered = models.filter((model) => (
+      ['monai_vista3d', 'monai_annotation', 'monai_segmentation'].includes(model.network_arch) &&
+      model.inference_dataset === dataset_id
+    ));
+
+    console.log(filtered)
 
     const all_labels = [];
     const modelLabelToIdxMap = {};
@@ -156,6 +166,8 @@ export default class MonaiServicePanel extends Component {
       modelLabelIndices[model_id] = [...Object.keys(modelIdxToLabelMap[model_id])].sort().map(Number);
     }
 
+
+
     const labelsOrdered = [...new Set(all_labels)].sort();
     const segmentations = [{
       id: '1',
@@ -170,6 +182,7 @@ export default class MonaiServicePanel extends Component {
     }];
     const initialSegs = segmentations[0].segments;
     const volumeLoadObject = cache.getVolume('1');
+    console.log(volumeLoadObject)
     if (!volumeLoadObject) {
       this.props.commandsManager.runCommand('loadSegmentationsForViewport', { segmentations });
     }

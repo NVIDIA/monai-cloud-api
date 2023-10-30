@@ -45,6 +45,8 @@ export default class ModelSelector extends Component {
     };
   }
 
+  
+
   static getDerivedStateFromProps(props, current_state) {
     if (current_state.models !== props.models) {
       return {

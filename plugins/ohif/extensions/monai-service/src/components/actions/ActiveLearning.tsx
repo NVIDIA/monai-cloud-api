@@ -70,18 +70,29 @@ export default class ActiveLearning extends BaseTab {
       duration: 2000,
     });
 
-    const scalarDataRecover = window.ScalarDataBuffer;
-    const volumeLoadObject = cache.getVolume('1');
+    if (window.ScalarDataBuffer) {
+      const scalarDataRecover = window.ScalarDataBuffer;
+      const volumeLoadObject = cache.getVolume('1');
+      console.log(volumeLoadObject)
+      console.log(scalarDataRecover)
 
-    console.log(volumeLoadObject)
-
-    if (volumeLoadObject) {
       const { scalarData } = volumeLoadObject;
-      scalarData.set(scalarDataRecover);
-      triggerEvent(eventTarget, Enums.Events.SEGMENTATION_DATA_MODIFIED, {
-        segmentationId: '1',
-      });
-      console.debug('updated the segmentation\'s scalar data');
+
+      if (scalarData.length === scalarDataRecover.length) {
+        scalarData.set(scalarDataRecover);
+        triggerEvent(eventTarget, Enums.Events.SEGMENTATION_DATA_MODIFIED, {
+          segmentationId: '1',
+        });
+
+        console.debug("Updated the segmentation's scalar data");
+      } else {
+        this.notification.show({
+          title: 'MONAI Service',
+          message: 'Scalar data lengths do not match, cannot update.',
+          type: 'error',
+          duration: 6000,
+        });
+      }
     } else {
       this.notification.show({
         title: 'MONAI Service',
@@ -89,7 +100,6 @@ export default class ActiveLearning extends BaseTab {
         type: 'error',
         duration: 6000,
       });
-      return
     }
   };
 
@@ -175,7 +185,7 @@ export default class ActiveLearning extends BaseTab {
           defaultChecked
         />
         <label className='tab-label' htmlFor={this.tabId}>
-          Active Learning
+          Image Actions
         </label>
         <div className='tab-content'>
           <table style={{ fontSize: 'smaller', width: '100%' }}>
