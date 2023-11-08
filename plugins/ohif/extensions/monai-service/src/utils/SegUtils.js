@@ -18,9 +18,14 @@ function currentSegmentsInfo(segmentationService) {
   const info = {};
   const indices = new Set();
 
-  const segmentations = segmentationService.getSegmentations();
+  const segmentations = segmentationService.getSegmentations().length === 0
+  ? segmentationService.segmentations
+  : segmentationService.getSegmentations();
+
+  console.log(segmentations)
   if (segmentations && segmentations.length) {
     const segmentation = segmentations[0];
+    console.log(segmentation)
     const { segments } = segmentation;
     for (const segment of segments) {
       if (segment) {

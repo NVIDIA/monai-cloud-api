@@ -216,6 +216,7 @@ export default class ClassPrompts extends BaseTab {
     const models = this.getModels();
     const display = models.length > 0 ? 'block' : 'none';
     const segInfo = this.segmentInfo();
+    console.log(segInfo)
     if (Object.keys(this.state.selectedOrgans).length == 0 && models.length > 0) {
       this.state.selectedOrgans = this.getModelOrgans(models[0].id);
     }
@@ -301,9 +302,6 @@ export default class ClassPrompts extends BaseTab {
           <br />
 
           <div className='optionsTableContainer'>
-            <hr />
-            <p>Selected Organ(s):</p>
-            <hr />
             <div className='bodyTableContainer'>
               <table className='optionsTable'>
                 <tbody>

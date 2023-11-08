@@ -48,10 +48,12 @@ export default class MonaiServiceClient {
   }
 
   async cache_image(seriesInstanceUID) {
+    console.log(this.dataset_id)
     const url = `${this.base_url}/dataset/${this.dataset_id}/job/cacheimage`;
     const data = {
       'image': seriesInstanceUID,
     };
+    console.log(seriesInstanceUID)
     return await this.api_post(url, data);
   }
 
@@ -77,9 +79,13 @@ export default class MonaiServiceClient {
     console.log(data);
     // cache the current annotation in case of recovery loop
     const segVolumeObject = cache.getVolume('1');
-    const currentSegArray = new Uint8Array(segVolumeObject.scalarData.length);
-    currentSegArray.set(segVolumeObject.scalarData);
-    window.ScalarDataBuffer = currentSegArray;
+    console.log(segVolumeObject)
+    if (segVolumeObject && segVolumeObject.hasOwnProperty('scalarData')) {
+      // The 'segVolumeObject' exists and has the 'scalarData' property
+      const currentSegArray = new Uint8Array(segVolumeObject.scalarData.length);
+      currentSegArray.set(segVolumeObject.scalarData);
+      window.ScalarDataBuffer = currentSegArray;
+    }
 
     return await this.api_post(url, data, 'arraybuffer');
   }
