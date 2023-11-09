@@ -178,7 +178,7 @@ export default class PointPrompts extends BaseTab {
 
     this.notification.show({
       title: 'MONAI Service',
-      message: 'Run Point Promots - Successful',
+      message: 'Run Point Prompts - Successful',
       type: 'success',
       duration: 4000,
     });
