@@ -330,7 +330,7 @@ export default class MonaiServicePanel extends Component {
       <div className='monaiServicePanel'>
         <br style={{ margin: '3px' }} />
         <hr className='separator' />
-        <p className='subtitle'>MONAI Service</p>
+        <p className='subtitle'>MONAI Service Ver. 0.2.0 7e7a181</p>
         <div className='tabs scrollbar' id='style-3'>
           <ActiveLearning
             ref={this.actions['activelearning']}

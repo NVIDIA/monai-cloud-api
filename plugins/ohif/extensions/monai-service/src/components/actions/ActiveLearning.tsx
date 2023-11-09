@@ -118,11 +118,22 @@ export default class ActiveLearning extends BaseTab {
 
     for (const item of activeDisplaySets){
       if (item.Modality === "SEG"){
-        segCount++
-        const curLabelTimestamp = `${item.SeriesDate}${item.instance.SeriesTime}`;
-        if (curLabelTimestamp > latestLabelSeriesTimestamp) {
-          latestLabelSeriesTimestamp = curLabelTimestamp;
-          latestLabelSeriesInstanceUID = item.SeriesInstanceUID;
+        console.log(item)
+        console.log(item.instance.NumberOfFrames)
+        if (item.instance.NumberOfFrames && item.instance.NumberOfFrames !== 0) {
+          segCount++
+          const curLabelTimestamp = `${item.SeriesDate}${item.instance.SeriesTime}`;
+          if (curLabelTimestamp > latestLabelSeriesTimestamp) {
+            latestLabelSeriesTimestamp = curLabelTimestamp;
+            latestLabelSeriesInstanceUID = item.SeriesInstanceUID;
+          }
+        } else {
+          this.notification.show({
+            title: 'MONAI Service',
+            message: 'Empty segmentation detected, skipped',
+            type: 'info',
+            duration: 5000,
+          });
         }
       } else if (item.Modality === "CT"){ //TODO: if image modality is other than CT, add others
         latestImageSeriesInstanceUID = item.SeriesInstanceUID;
