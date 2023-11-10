@@ -115,7 +115,7 @@ export default class ClassPrompts extends BaseTab {
     console.log(response.data)
 
     hideNotification(nid, this.notification);
-    if (response.status !== 200) {
+    if (response.status >= 400) {
       this.notification.show({
         title: 'MONAI Service',
         message: 'Failed to Run Class Based Inference',

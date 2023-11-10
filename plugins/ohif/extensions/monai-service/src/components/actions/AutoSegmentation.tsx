@@ -81,7 +81,7 @@ export default class AutoSegmentation extends BaseTab {
     console.log(response)
 
     hideNotification(nid, this.notification);
-    if (response.status !== 200) {
+    if (response.status >= 400) {
       this.notification.show({
         title: 'MONAI Service',
         message: 'Failed to Run Segmentation',
