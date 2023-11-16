@@ -79,7 +79,17 @@ export default class ClassPrompts extends BaseTab {
 
   onRunInference = async () => {
     const { info, viewConstants } = this.props;
-    const seriesInstanceUID = viewConstants.SeriesInstanceUID;
+
+    let seriesInstanceUID = viewConstants.SeriesInstanceUID;
+
+    const { displaySetService } = this.props.servicesManager.services;
+    const activeDisplaySets = displaySetService.activeDisplaySets
+    for (const item of activeDisplaySets){
+      if (item.Modality === "CT"){
+        seriesInstanceUID = item.SeriesInstanceUID;
+      }
+    }
+    console.log('seriesInstanceUID:', seriesInstanceUID)
     const models = this.getModels();
     const model_id = this.state.currentModel ? this.state.currentModel : models[0].id;
     console.log('Using Model: ', model_id);

@@ -77,11 +77,27 @@ export default class MonaiServicePanel extends Component {
       this.StudyInstanceUID = displaySet.StudyInstanceUID;
       this.FrameOfReferenceUID = displaySet.instances[0].FrameOfReferenceUID;
       this.displaySetInstanceUID = displaySet.displaySetInstanceUID;
+
+      const activeDisplaySets = displaySetService.activeDisplaySets
+      for (const item of activeDisplaySets){
+        if (item.Modality === "CT"){
+          this.SeriesInstanceUID = item.SeriesInstanceUID;
+          this.StudyInstanceUID = item.StudyInstanceUID;
+          this.FrameOfReferenceUID = item.instances[0].FrameOfReferenceUID;
+          this.displaySetInstanceUID = item.displaySetInstanceUID;
+        }
+      }
     }, 1000);
   }
 
   client = () => {
-    return new MonaiServiceClient();
+    const c = new MonaiServiceClient();
+    const { userAuthenticationService } = this.props.servicesManager.services;
+    const authHeaders = userAuthenticationService.getAuthorizationHeader();
+    if (authHeaders && authHeaders.Authorization) {
+      c.accessToken = authHeaders.Authorization;
+    }
+    return c;
   };
 
 
@@ -348,6 +364,8 @@ export default class MonaiServicePanel extends Component {
           <AutoSegmentation
             ref={this.actions['segmentation']}
             tabIndex={2}
+            servicesManager={this.props.servicesManager}
+            commandsManager={this.props.commandsManager}
             info={this.state.info}
             viewConstants={{
               SeriesInstanceUID: this.SeriesInstanceUID,
