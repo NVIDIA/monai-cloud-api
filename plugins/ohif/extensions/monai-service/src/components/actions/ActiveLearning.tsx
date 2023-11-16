@@ -30,7 +30,7 @@ export default class ActiveLearning extends BaseTab {
       title: 'MONAI Service',
       message: 'Fetching Next Recommended Image for Annotation',
       type: 'info',
-      duration: 4000,
+      duration: 20000,
     });
 
     const response = await this.props.client().next_image();
@@ -118,8 +118,6 @@ export default class ActiveLearning extends BaseTab {
 
     for (const item of activeDisplaySets){
       if (item.Modality === "SEG"){
-        console.log(item)
-        console.log(item.instance.NumberOfFrames)
         if (item.instance.NumberOfFrames && item.instance.NumberOfFrames !== 0) {
           segCount++
           const curLabelTimestamp = `${item.SeriesDate}${item.instance.SeriesTime}`;

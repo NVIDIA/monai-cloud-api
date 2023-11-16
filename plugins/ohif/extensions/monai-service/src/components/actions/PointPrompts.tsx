@@ -94,7 +94,17 @@ export default class PointPrompts extends BaseTab {
     }
 
     const { info, viewConstants } = this.props;
-    const seriesInstanceUID = viewConstants.SeriesInstanceUID;
+
+    let seriesInstanceUID = viewConstants.SeriesInstanceUID;
+
+    const { displaySetService } = this.props.servicesManager.services;
+    const activeDisplaySets = displaySetService.activeDisplaySets
+    for (const item of activeDisplaySets){
+      if (item.Modality === "CT"){
+        seriesInstanceUID = item.SeriesInstanceUID;
+      }
+    }
+    console.log('seriesInstanceUID:', seriesInstanceUID)
 
     const models = info.models;
     let selectedModel = 0;
