@@ -30,7 +30,7 @@ export default class ActiveLearning extends BaseTab {
       title: 'MONAI Service',
       message: 'Fetching Next Recommended Image for Annotation',
       type: 'info',
-      duration: 20000,
+      duration: 40000,
     });
 
     const response = await this.props.client().next_image();

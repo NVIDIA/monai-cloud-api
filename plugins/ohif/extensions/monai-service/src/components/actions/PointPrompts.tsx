@@ -55,8 +55,9 @@ export default class PointPrompts extends BaseTab {
     this.props.commandsManager.runCommand('setToolActive', {
       toolName: 'ProbeMONAIService',
     });
+    this.onSelectModel(this.state.currentModel);
+    window.current_point_class = null;
     console.info('Here we activate the probe');
-
   };
 
   onLeaveActionTab = () => {
@@ -81,6 +82,26 @@ export default class PointPrompts extends BaseTab {
     const annotations = manager.saveAnnotations(null, 'ProbeMONAIService');
 
     const { currentLabel, clickPoints } = this.state;
+    console.log('click points', clickPoints)
+    console.log('in inference annotations:', annotations)
+
+    // Check if clickPoints is null or empty
+    if (!annotations || Object.keys(annotations).length === 0) {
+      // Send notification for empty or null clickPoints
+      hideNotification(nid, this.notification);
+
+      this.notification.show({
+        title: 'Notification',
+        message: 'Error: clickPoints is empty or null',
+        type: 'error',
+        duration: 6000,
+      });
+
+      // Prohibit further actions (return or throw an error, depending on your logic)
+      // Example of returning from the function:
+      return;
+    }
+
     clickPoints[currentLabel] = annotations;
 
     if (currentLabel === 'background') {
@@ -208,7 +229,7 @@ export default class PointPrompts extends BaseTab {
       console.log('Current Label is Null (No need to init)');
       return;
     }
-
+    console.log('In init points:', label)
     const { toolGroupService, viewportGridService } = this.props.servicesManager.services;
     const { viewports, activeViewportId } = viewportGridService.getState();
     const viewport = viewports.get(activeViewportId);
@@ -250,19 +271,22 @@ export default class PointPrompts extends BaseTab {
       console.log('Both new and prev are same');
       return;
     }
-
     const prev = this.state.currentLabel;
+
+    if (prev !== 'Background' && name !== 'Background'){
+      this.clearPoints();
+    }
+
     const clickPoints = this.state.clickPoints;
     if (prev) {
       const manager = cornerstoneTools.annotation.state.getAnnotationManager();
       const annotations = manager.saveAnnotations(null, 'ProbeMONAIService');
       console.log('Saving Prev annotations...', annotations);
-
       this.state.clickPoints[prev] = annotations;
-      this.clearPoints();
     }
 
     this.state.currentLabel = name;
+    window.current_point_class = name;
     this.setState({ currentLabel: name, clickPoints: clickPoints });
     this.initPoints();
   };
@@ -328,8 +352,7 @@ export default class PointPrompts extends BaseTab {
             onSelectModel={this.onSelectModel}
             usage={
               <div style={{ fontSize: 'smaller' }}>
-                <p>Select an anatomy from the segments menu above.</p>
-                <p>To guide the inference, use foreground (target) clicks:</p>
+                <p style={{ fontWeight: 'bold' }}>Select an anatomy before placing click points.</p>
                 <u>
                   <a style={{ color: 'red', cursor: 'pointer' }} onClick={() => this.clearPoints()}>Clear Points</a>
                 </u> | <u>

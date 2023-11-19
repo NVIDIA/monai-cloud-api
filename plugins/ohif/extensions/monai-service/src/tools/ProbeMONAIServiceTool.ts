@@ -37,11 +37,18 @@ export default class ProbeMONAIServiceTool extends ProbeTool {
     const { viewport } = enabledElement;
     const { element } = viewport;
 
+    if (!window.current_point_class) {
+      // alert('Error: Please select a control point target class.');
+      return renderStatus;
+    }
+
     let annotations = getAnnotations(this.getToolName(), element);
 
     if (!annotations?.length) {
       return renderStatus;
     }
+
+
 
     annotations = this.filterInteractableAnnotationsForElement(
       element,
@@ -61,10 +68,13 @@ export default class ProbeMONAIServiceTool extends ProbeTool {
       viewportId: enabledElement.viewport.id,
     };
 
+    
     for (let i = 0; i < annotations.length; i++) {
       const annotation = annotations[i] as ProbeAnnotation;
       const annotationUID = annotation.annotationUID;
+
       const data = annotation.data;
+
       const point = data.handles.points[0];
       const canvasCoordinates = viewport.worldToCanvas(point);
 
