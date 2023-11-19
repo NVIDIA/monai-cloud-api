@@ -352,8 +352,7 @@ export default class PointPrompts extends BaseTab {
             onSelectModel={this.onSelectModel}
             usage={
               <div style={{ fontSize: 'smaller' }}>
-                <p>Select an anatomy from the segments menu above.</p>
-                <p>To guide the inference, use foreground (target) clicks:</p>
+                <p style={{ fontWeight: 'bold' }}>Select an anatomy before placing click points.</p>
                 <u>
                   <a style={{ color: 'red', cursor: 'pointer' }} onClick={() => this.clearPoints()}>Clear Points</a>
                 </u> | <u>
