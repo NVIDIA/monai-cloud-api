@@ -69,22 +69,17 @@ export default class ActiveLearning extends BaseTab {
       type: 'info',
       duration: 2000,
     });
-
+    console.log(window.ScalarDataBuffer)
     if (window.ScalarDataBuffer) {
       const scalarDataRecover = window.ScalarDataBuffer;
       const volumeLoadObject = cache.getVolume('1');
-      console.log(volumeLoadObject)
-      console.log(scalarDataRecover)
 
       const { scalarData } = volumeLoadObject;
-
       if (scalarData.length === scalarDataRecover.length) {
         scalarData.set(scalarDataRecover);
         triggerEvent(eventTarget, Enums.Events.SEGMENTATION_DATA_MODIFIED, {
           segmentationId: '1',
         });
-
-        console.debug("Updated the segmentation's scalar data");
       } else {
         this.notification.show({
           title: 'MONAI Service',
@@ -225,7 +220,7 @@ export default class ActiveLearning extends BaseTab {
           </table>
           <br />
           <u>
-            <a href='#' style={{ color: 'lightyellow', fontSize: 'smaller' }} onClick={() => this.onClickRecoverSeg()}>Recover Seg</a>
+            <a style={{ color: 'lightyellow', fontSize: 'smaller', cursor: 'pointer' }} onClick={this.onClickRecoverSeg}>Recover Seg</a>
           </u>
         </div>
       </div>
