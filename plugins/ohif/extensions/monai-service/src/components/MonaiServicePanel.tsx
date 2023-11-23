@@ -198,8 +198,9 @@ export default class MonaiServicePanel extends Component {
     }];
     const initialSegs = segmentations[0].segments;
     const volumeLoadObject = cache.getVolume('1');
-    console.log(volumeLoadObject)
+    console.log('Here in panel start!!!', volumeLoadObject)
     if (!volumeLoadObject) {
+      console.log('Here in run command !!', volumeLoadObject)
       this.props.commandsManager.runCommand('loadSegmentationsForViewport', { segmentations });
     }
 
@@ -352,6 +353,7 @@ export default class MonaiServicePanel extends Component {
             ref={this.actions['activelearning']}
             tabIndex={1}
             servicesManager={this.props.servicesManager}
+            commandsManager={this.props.commandsManager}
             info={this.state.info}
             viewConstants={{
               SeriesInstanceUID: this.SeriesInstanceUID,
