@@ -198,9 +198,7 @@ export default class MonaiServicePanel extends Component {
     }];
     const initialSegs = segmentations[0].segments;
     const volumeLoadObject = cache.getVolume('1');
-    console.log('Here in panel start!!!', volumeLoadObject)
     if (!volumeLoadObject) {
-      console.log('Here in run command !!', volumeLoadObject)
       this.props.commandsManager.runCommand('loadSegmentationsForViewport', { segmentations });
     }
 
