@@ -9,6 +9,8 @@ ENV APP_CONFIG=config/monai_service.js
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 ADD Viewers /usr/src/app/
+RUN npm i -g nx
+
 RUN yarn config set workspaces-experimental true
 RUN yarn install
 RUN QUICK_BUILD=true yarn run build
