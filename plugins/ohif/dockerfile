@@ -5,12 +5,31 @@ WORKDIR /usr/src/app
 
 RUN apt-get update && apt-get install -y build-essential python3
 
+
+
+# RUN npx nx run-many --target=build --all
+
 ENV APP_CONFIG=config/monai_service.js
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 ADD Viewers /usr/src/app/
+
+
+RUN npm i -g nx
+
+
 RUN yarn config set workspaces-experimental true
+
+RUN rm -rf node_modules
+
 RUN yarn install
+# RUN npm run clean
+# RUN yarn clean
+
+RUN npx nx migrate latest
+
+# Using yarn
+RUN yarn nx migrate latest
 RUN QUICK_BUILD=true yarn run build
 
 # Stage 2: Bundle the built application into a Docker container
