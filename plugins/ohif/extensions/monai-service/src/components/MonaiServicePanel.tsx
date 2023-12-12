@@ -182,9 +182,11 @@ export default class MonaiServicePanel extends Component {
       modelLabelIndices[model_id] = [...Object.keys(modelIdxToLabelMap[model_id])].sort().map(Number);
     }
 
-
-
     const labelsOrdered = [...new Set(all_labels)].sort();
+    const currentSegs = currentSegmentsInfo(this.props.servicesManager.services.segmentationService);
+    console.log('1st currentSegs', currentSegs)
+
+
     const segmentations = [{
       id: '1',
       label: 'Segmentations',
@@ -198,9 +200,21 @@ export default class MonaiServicePanel extends Component {
     }];
     const initialSegs = segmentations[0].segments;
     const volumeLoadObject = cache.getVolume('1');
+
+    console.log('volumeLoadObject', volumeLoadObject)
     if (!volumeLoadObject) {
       this.props.commandsManager.runCommand('loadSegmentationsForViewport', { segmentations });
     }
+
+    // load segment volume
+
+    console.log('labelsOrdered', labelsOrdered)
+    console.log('this.state.currentModel', this.state.currentModel)
+    const currentModelId = this.state.currentModel ? this.state.currentModel : models[0].id;
+    console.log('currentModelId', currentModelId)
+
+    await this.loadSegVolume(modelLabelToIdxMap[currentModelId], modelLabelNames[currentModelId])
+
 
     const datasets = await this.client().list_datasets();
     const info = {
@@ -215,6 +229,67 @@ export default class MonaiServicePanel extends Component {
 
     console.log(info);
     this.setState({ info: info });
+  };
+
+  loadSegVolume = async (modelLabelToIdxMap, labels) => {
+    console.log('Load segmentation volume ....');
+
+    console.info(labels);
+
+    const labelNames = {};
+    const currentSegs = this.props.servicesManager.services.segmentationService.getSegmentations().length === 0
+      ? this.props.servicesManager.services.segmentationService.segmentations
+      : this.props.servicesManager.services.segmentationService.getSegmentations();
+
+    console.log('In currentSegs', currentSegs)
+    const modelToSegMapping = {};
+    modelToSegMapping[0] = 0;
+
+    for (const label of labels) {
+      const s = currentSegs.info[label];
+      if (!s) {
+        for (let i = 1; i <= 255; i++) {
+          if (!currentSegs.indices.has(i)) {
+            labelNames[label] = i;
+            currentSegs.indices.add(i);
+            break;
+          }
+        }
+      } else {
+        labelNames[label] = s.segmentIndex;
+      }
+
+      const seg_idx = labelNames[label];
+      const model_idx = modelLabelToIdxMap[label];
+      modelToSegMapping[model_idx] = 0xFF & seg_idx;
+    }
+
+    console.log('Index Remap', labels, modelToSegMapping);
+
+    // Todo: rename volumeId
+    // const volumeLoadObject = cache.getVolume('1');
+    // if (volumeLoadObject) {
+    //   const { scalarData } = volumeLoadObject;
+    //   const convertedData = new Uint8Array(scalarData.length * 2); // Each uint16 requires 2 bytes
+    //   for (let i = 0; i < data.length; i++) {
+    //     const uint16Value = data[i];
+    //     convertedData[i * 2] = uint16Value & 0xFF; // Low byte
+    //     convertedData[i * 2 + 1] = (uint16Value >> 8) & 0xFF; // High byte
+    //   }
+
+    //   // Model Idx to Segment Idx conversion (merge for multiple models with different label idx for the same name)
+    //   for (var i = 0; i < convertedData.length; i++) {
+    //     const midx = convertedData[i];
+    //     const sidx = modelToSegMapping[midx];
+    //     if (midx && sidx) {
+    //       convertedData[i] = sidx;
+    //     }
+    //   }
+
+    //   scalarData.set(convertedData);
+    //   triggerEvent(eventTarget, Enums.Events.SEGMENTATION_DATA_MODIFIED, { segmentationId: '1' });
+    //   console.debug('updated the segmentation\'s scalar data');
+    // }
   };
 
   onSelectActionTab = (name) => {
@@ -343,9 +418,9 @@ export default class MonaiServicePanel extends Component {
   render() {
     return (
       <div className='monaiServicePanel'>
-        <br style={{ margin: '3px' }} />
+        <br style={{ margin: '3px'}} />
         <hr className='separator' />
-        <p className='subtitle'>MONAI Service Ver. 0.2.0 7e7a181</p>
+        <p className='subtitle'>MONAI Service Ver. 0.0.2-beta6</p>
         <div className='tabs scrollbar' id='style-3'>
           <ActiveLearning
             ref={this.actions['activelearning']}

@@ -91,9 +91,13 @@ export default class ClassPrompts extends BaseTab {
     }
     console.log('seriesInstanceUID:', seriesInstanceUID)
     const models = this.getModels();
+    console.log('list all models !!!!!!!!', models)
     const model_id = this.state.currentModel ? this.state.currentModel : models[0].id;
     console.log('Using Model: ', model_id);
 
+    if (model_id == "") {
+
+    }
     const label_names = [];
     const label_classes = [];
     for (const label in this.state.selectedOrgans) {
@@ -232,7 +236,7 @@ export default class ClassPrompts extends BaseTab {
     }
 
     return (
-      <div className='tab' style={{ 'display': display }}>
+      <div className='tab' style={{ 'display': display}}>
         <input
           type='radio'
           name='rd'

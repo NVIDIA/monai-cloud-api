@@ -23,6 +23,7 @@ limitations under the License.
   flex-direction: column;
   color: var(--text-primary-color);
   padding: 2px;
+  overflow-y: auto;
 /* Accordion styles */
 }
 .monaiServicePanel .subtitle {
@@ -42,8 +43,9 @@ limitations under the License.
 }
 .monaiServicePanel .tab {
   width: 100%;
-  color: #fff;
+  color: #000000;
   overflow: hidden;
+  /* overflow-y: scroll; */
 }
 .monaiServicePanel .tab-switch {
   position: absolute;
@@ -149,5 +151,5 @@ limitations under the License.
   background-color: #000;
 }
 #style-3::-webkit-scrollbar-thumb {
-  background-color: #f5f5f5;
+  background-color: #000000;
 }

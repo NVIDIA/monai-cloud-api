@@ -33,7 +33,7 @@ limitations under the License.
   width: 100%;
 }
 .bodyTableContainer {
-  max-height: 300px;
+  max-height: 250px;
   overflow-y: auto;
 }
 .segColor {
