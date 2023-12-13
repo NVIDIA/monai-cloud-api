@@ -104,10 +104,11 @@ export default class PointPrompts extends BaseTab {
 
     clickPoints[currentLabel] = annotations;
 
-    if (currentLabel === 'background') {
+    console.log('Fixing currentLabel issues', currentLabel)
+    if (currentLabel === null || currentLabel === 'background') {
       this.notification.show({
         title: 'MONAI Service',
-        message: 'Please click an anatomy for point click editing other than background',
+        message: 'Please click a foreground anatomy for point click editing',
         type: 'error',
         duration: 10000,
       });
@@ -214,7 +215,7 @@ export default class PointPrompts extends BaseTab {
       duration: 4000,
     });
 
-    const segVolumeObject = cache.getVolume('1');
+    const segVolumeObject = cache.getVolume('monaiservice');
     const currentSegArray = new Uint8Array(segVolumeObject.scalarData.length);
 
     currentSegArray.set(segVolumeObject.scalarData);

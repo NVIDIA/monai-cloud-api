@@ -78,7 +78,7 @@ export default class MonaiServiceClient {
     };
     console.log(data);
     // cache the current annotation in case of recovery loop
-    const segVolumeObject = cache.getVolume('1');
+    const segVolumeObject = cache.getVolume('monaiservice');
     console.log(segVolumeObject)
     if (segVolumeObject && segVolumeObject.hasOwnProperty('scalarData')) {
       // The 'segVolumeObject' exists and has the 'scalarData' property

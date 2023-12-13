@@ -72,13 +72,13 @@ export default class ActiveLearning extends BaseTab {
     console.log(window.ScalarDataBuffer)
     if (window.ScalarDataBuffer) {
       const scalarDataRecover = window.ScalarDataBuffer;
-      const volumeLoadObject = cache.getVolume('1');
+      const volumeLoadObject = cache.getVolume('monaiservice');
 
       const { scalarData } = volumeLoadObject;
       if (scalarData.length === scalarDataRecover.length) {
         scalarData.set(scalarDataRecover);
         triggerEvent(eventTarget, Enums.Events.SEGMENTATION_DATA_MODIFIED, {
-          segmentationId: '1',
+          segmentationId: 'monaiservice',
         });
       } else {
         this.notification.show({
