@@ -144,15 +144,6 @@ export default class MonaiServicePanel extends Component {
     await this.client().cache_image(this.SeriesInstanceUID);
 
     const models = response.data;
-    // const filtered = [];
-    // for (const model of models) {
-    //   const { network_arch, inference_dataset } = model;
-    //   if (network_arch === 'monai_vista3d' || network_arch === 'monai_annotation' || network_arch === 'monai_segmentation') {
-    //     if (inference_dataset === this.dataset_id) {
-    //       filtered.push(model);
-    //     }
-    //   }
-    // }
     const dataset_id = window.config.datasetId ? window.config.datasetId : window.config.monaiService.datasetId;
     const filtered = models.filter((model) => (
       ['monai_vista3d', 'monai_annotation', 'monai_segmentation'].includes(model.network_arch) &&
@@ -183,12 +174,36 @@ export default class MonaiServicePanel extends Component {
     }
 
     const labelsOrdered = [...new Set(all_labels)].sort();
-    const currentSegs = currentSegmentsInfo(this.props.servicesManager.services.segmentationService);
-    console.log('1st currentSegs', currentSegs)
 
+    //   TODO: support continue edits and load from existing label
+    const currentSegs = await this.props.servicesManager.services.segmentationService.getSegmentations().length === 0
+      ? this.props.servicesManager.services.segmentationService.segmentations
+      : this.props.servicesManager.services.segmentationService.getSegmentations();
+    let initialSegs;
+    // if (currentSegs && currentSegs.length) {
+    //   const currentModelId = this.state.currentModel ? this.state.currentModel : models[0].id;
+    //   console.log('currentModelId', currentModelId)
+    //   currentSegs[0].id = 'monaiservice'
+    //   currentSegs[0].segments =  labelsOrdered.map((label, index) => ({
+    //     segmentIndex: index + 1,
+    //     label: label,
+    //     color: this.segmentColor(label),
+    //   }))
+    //   currentSegs[0].isActive = true
+    //   currentSegs[0].activeSegmentIndex = 1
+    //   currentSegs[0].label = 'Segmentations'
+    //   console.log('currentSegs', currentSegs)
+    //   const volumeLoadObject = cache.getVolume('monaiservice');
+    //   console.log('volumeLoadObject load', volumeLoadObject)
+    //   if (!volumeLoadObject) {
+    //     this.props.commandsManager.runCommand('loadSegmentationsForViewport', { currentSegs });
+    //   }
+    //   await this.loadSegVolume(modelLabelToIdxMap[currentModelId], modelLabelNames[currentModelId])
+    //   initialSegs = currentSegs[0].segments;
 
+    // } 
     const segmentations = [{
-      id: '1',
+      id: 'monaiservice',
       label: 'Segmentations',
       segments: labelsOrdered.map((label, index) => ({
         segmentIndex: index + 1,
@@ -198,23 +213,14 @@ export default class MonaiServicePanel extends Component {
       isActive: true,
       activeSegmentIndex: 1,
     }];
-    const initialSegs = segmentations[0].segments;
-    const volumeLoadObject = cache.getVolume('1');
+    initialSegs = segmentations[0].segments;
+    const volumeLoadObject = cache.getVolume('monaiservice');
 
     console.log('volumeLoadObject', volumeLoadObject)
     if (!volumeLoadObject) {
       this.props.commandsManager.runCommand('loadSegmentationsForViewport', { segmentations });
     }
-
-    // load segment volume
-
-    console.log('labelsOrdered', labelsOrdered)
-    console.log('this.state.currentModel', this.state.currentModel)
-    const currentModelId = this.state.currentModel ? this.state.currentModel : models[0].id;
-    console.log('currentModelId', currentModelId)
-
-    await this.loadSegVolume(modelLabelToIdxMap[currentModelId], modelLabelNames[currentModelId])
-
+    
 
     const datasets = await this.client().list_datasets();
     const info = {
@@ -237,21 +243,22 @@ export default class MonaiServicePanel extends Component {
     console.info(labels);
 
     const labelNames = {};
-    const currentSegs = this.props.servicesManager.services.segmentationService.getSegmentations().length === 0
-      ? this.props.servicesManager.services.segmentationService.segmentations
-      : this.props.servicesManager.services.segmentationService.getSegmentations();
+    const currentSegsInfo = currentSegmentsInfo(this.props.servicesManager.services.segmentationService);
 
-    console.log('In currentSegs', currentSegs)
+    console.log('segmentation service', this.props.servicesManager.services.segmentationService)
+
+
+    console.log('In currentSegsInfo', currentSegsInfo)
     const modelToSegMapping = {};
     modelToSegMapping[0] = 0;
 
     for (const label of labels) {
-      const s = currentSegs.info[label];
+      const s = currentSegsInfo.info[label];
       if (!s) {
         for (let i = 1; i <= 255; i++) {
-          if (!currentSegs.indices.has(i)) {
+          if (!currentSegsInfo.indices.has(i)) {
             labelNames[label] = i;
-            currentSegs.indices.add(i);
+            currentSegsInfo.indices.add(i);
             break;
           }
         }
@@ -267,29 +274,24 @@ export default class MonaiServicePanel extends Component {
     console.log('Index Remap', labels, modelToSegMapping);
 
     // Todo: rename volumeId
-    // const volumeLoadObject = cache.getVolume('1');
-    // if (volumeLoadObject) {
-    //   const { scalarData } = volumeLoadObject;
-    //   const convertedData = new Uint8Array(scalarData.length * 2); // Each uint16 requires 2 bytes
-    //   for (let i = 0; i < data.length; i++) {
-    //     const uint16Value = data[i];
-    //     convertedData[i * 2] = uint16Value & 0xFF; // Low byte
-    //     convertedData[i * 2 + 1] = (uint16Value >> 8) & 0xFF; // High byte
-    //   }
+    const volumeLoadObject = cache.getVolume('monaiservice');
 
-    //   // Model Idx to Segment Idx conversion (merge for multiple models with different label idx for the same name)
-    //   for (var i = 0; i < convertedData.length; i++) {
-    //     const midx = convertedData[i];
-    //     const sidx = modelToSegMapping[midx];
-    //     if (midx && sidx) {
-    //       convertedData[i] = sidx;
-    //     }
-    //   }
+    if (volumeLoadObject) {
+      const { scalarData } = volumeLoadObject;
 
-    //   scalarData.set(convertedData);
-    //   triggerEvent(eventTarget, Enums.Events.SEGMENTATION_DATA_MODIFIED, { segmentationId: '1' });
-    //   console.debug('updated the segmentation\'s scalar data');
-    // }
+      // Model Idx to Segment Idx conversion (merge for multiple models with different label idx for the same name)
+      for (var i = 0; i < scalarData.length; i++) {
+        const midx = scalarData[i];
+        const sidx = modelToSegMapping[midx];
+        if (midx && sidx) {
+          scalarData[i] = sidx;
+        }
+      }
+
+      scalarData.set(scalarData);
+      triggerEvent(eventTarget, Enums.Events.SEGMENTATION_DATA_MODIFIED, { segmentationId: 'monaiservice' });
+      console.debug('updated the segmentation\'s scalar data');
+    }
   };
 
   onSelectActionTab = (name) => {
@@ -347,24 +349,26 @@ export default class MonaiServicePanel extends Component {
     const data = new Uint16Array(ret.image);
 
     // Todo: rename volumeId
-    const volumeLoadObject = cache.getVolume('1');
+    const volumeLoadObject = cache.getVolume('monaiservice');
+
+    const convertedData = new Uint8Array(data.length * 2); // Each uint16 requires 2 bytes
+    for (let i = 0; i < data.length; i++) {
+      const uint16Value = data[i];
+      convertedData[i * 2] = uint16Value & 0xFF; // Low byte
+      convertedData[i * 2 + 1] = (uint16Value >> 8) & 0xFF; // High byte
+    }
+
+    // Model Idx to Segment Idx conversion (merge for multiple models with different label idx for the same name)
+    for (var i = 0; i < convertedData.length; i++) {
+      const midx = convertedData[i];
+      const sidx = modelToSegMapping[midx];
+      if (midx && sidx) {
+        convertedData[i] = sidx;
+      }
+    }
+
     if (volumeLoadObject) {
       const { scalarData } = volumeLoadObject;
-      const convertedData = new Uint8Array(data.length * 2); // Each uint16 requires 2 bytes
-      for (let i = 0; i < data.length; i++) {
-        const uint16Value = data[i];
-        convertedData[i * 2] = uint16Value & 0xFF; // Low byte
-        convertedData[i * 2 + 1] = (uint16Value >> 8) & 0xFF; // High byte
-      }
-
-      // Model Idx to Segment Idx conversion (merge for multiple models with different label idx for the same name)
-      for (var i = 0; i < convertedData.length; i++) {
-        const midx = convertedData[i];
-        const sidx = modelToSegMapping[midx];
-        if (midx && sidx) {
-          convertedData[i] = sidx;
-        }
-      }
 
       if (override === true) {
         const scalarDataRecover = new Uint8Array(window.ScalarDataBuffer.length);
@@ -384,13 +388,13 @@ export default class MonaiServicePanel extends Component {
         scalarData.set(convertedData);
       }
 
-      triggerEvent(eventTarget, Enums.Events.SEGMENTATION_DATA_MODIFIED, { segmentationId: '1' });
+      triggerEvent(eventTarget, Enums.Events.SEGMENTATION_DATA_MODIFIED, { segmentationId: 'monaiservice' });
       console.debug('updated the segmentation\'s scalar data');
     } else {
       // TODO:: Remap Index here as well...
       console.log('Not In Cache....');
       const segmentations = [{
-        id: '1',
+        id: 'monaiservice',
         label: 'Segmentations',
         segments: Object.entries(labelNames).map(([k, v]) => ({
           segmentIndex: v,
@@ -399,14 +403,11 @@ export default class MonaiServicePanel extends Component {
         })),
         isActive: true,
         activeSegmentIndex: 1,
-        scalarData: data,
+        scalarData: convertedData,
         FrameOfReferenceUID: this.FrameOfReferenceUID,
       }];
-
-      this.props.commandsManager.runCommand('loadSegmentationsForDisplaySet', {
-        displaySetInstanceUID: this.displaySetInstanceUID,
-        segmentations,
-      });
+      this.props.commandsManager.runCommand('loadSegmentationsForViewport', { segmentations });
+      triggerEvent(eventTarget, Enums.Events.SEGMENTATION_DATA_MODIFIED, { segmentationId: 'monaiservice' });
     }
   };
 

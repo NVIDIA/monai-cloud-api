@@ -215,7 +215,7 @@ export default class PointPrompts extends BaseTab {
       duration: 4000,
     });
 
-    const segVolumeObject = cache.getVolume('1');
+    const segVolumeObject = cache.getVolume('monaiservice');
     const currentSegArray = new Uint8Array(segVolumeObject.scalarData.length);
 
     currentSegArray.set(segVolumeObject.scalarData);
