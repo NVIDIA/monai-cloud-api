@@ -32,26 +32,32 @@ export default class MonaiServiceClient {
     this.api_endpoint = window.config.monaiService.server;
     this.user_id = window.config.monaiService.userId;
     this.dataset_id = window.config.datasetId ? window.config.datasetId : window.config.monaiService.datasetId;
-    this.accessToken = window.config.accessToken;
-
-    this.base_url = `${this.api_endpoint}/user/${this.user_id}`;
+    this.accessToken = window.config.accessToken ? window.config.accessToken : window.config.monaiService.accessToken;
+    this.base_url = `${this.api_endpoint}/users/${this.user_id}`;
+    console.log('this base url', this.base_url)
   }
 
   async list_models() {
-    const url = `${this.base_url}/model?user_only=true`;
+    const url = `${this.base_url}/experiments`;
+    console.log("check URL", url)
     return await this.api_get(url);
   }
 
   async list_datasets() {
-    const url = `${this.base_url}/dataset`;
+    const url = `${this.base_url}/datasets`;
     return await this.api_get(url);
   }
 
   async cache_image(seriesInstanceUID) {
     console.log(this.dataset_id)
-    const url = `${this.base_url}/dataset/${this.dataset_id}/job/cacheimage`;
+    const url = `${this.base_url}/datasets/${this.dataset_id}/jobs`;
+    const specs = {
+      "image":seriesInstanceUID,
+      "ttl": 60
+    }
     const data = {
-      'image': seriesInstanceUID,
+      'action':'cacheimage',
+      'specs': specs
     };
     console.log(seriesInstanceUID)
     return await this.api_post(url, data);
@@ -59,23 +65,31 @@ export default class MonaiServiceClient {
 
   async next_image() {
     console.log('load next series');
-    const url = `${this.base_url}/dataset/${this.dataset_id}/job/nextimage`;
-    const data = {};
+    const url = `${this.base_url}/datasets/${this.dataset_id}/jobs`;
+    const data = {
+      'action':'nextimage',
+    };
     return await this.api_post(url, data);
   }
   
-  async notify(data) {
+  async notify(specs) {
     console.log('load next series');
-    const url = `${this.base_url}/dataset/${this.dataset_id}/job/notify`;
+    const url = `${this.base_url}/datasets/${this.dataset_id}/jobs`;
+    const data = {
+      "action": "notify", 
+      "specs": specs
+    }
     return await this.api_post(url, data);
   }
 
   async inference(model_id, seriesInstanceUID, params = {}, result_extension = '.nrrd') {
-    const url = `${this.base_url}/model/${model_id}/job/inference`;
-    const data = {
+    const url = `${this.base_url}/experiments/${model_id}/jobs`;
+
+    const inference_specs = {
       'image': seriesInstanceUID,
       'bundle_params': params,
     };
+    const data = {"action": "inference", "specs": inference_specs}
     console.log(data);
     // cache the current annotation in case of recovery loop
     const segVolumeObject = cache.getVolume('monaiservice');
@@ -86,7 +100,6 @@ export default class MonaiServiceClient {
       currentSegArray.set(segVolumeObject.scalarData);
       window.ScalarDataBuffer = currentSegArray;
     }
-
     return await this.api_post(url, data, 'arraybuffer');
   }
 
@@ -95,8 +108,13 @@ export default class MonaiServiceClient {
     if (this.accessToken) {
       axios.defaults.headers.common['Authorization'] = this.accessToken;
     }
-
-    return axios.get(url)
+    
+    return axios.get(url,{
+      headers: {
+      'Authorization': this.accessToken ? `Bearer ${this.accessToken}` : undefined,
+      },
+      verify: false
+      })
       .then(function(response) {
         console.debug(response);
         return response;
@@ -109,6 +127,7 @@ export default class MonaiServiceClient {
   }
 
   api_post(url, body, responseType = 'json') {
+    console.log('POST URL', url)
     if (this.accessToken) {
       axios.defaults.headers.common['Authorization'] = this.accessToken;
     }
@@ -119,10 +138,13 @@ export default class MonaiServiceClient {
       headers: {
         accept: ['application/json', 'multipart/form-data'],
       },
+      verify:false
     }).then(function(response) {
       console.debug(response);
+      console.log(response)
       return response;
     }).catch(function(error) {
+      console.log(error)
       return error;
     }).finally(function() {
     });

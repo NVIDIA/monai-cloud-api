@@ -5,7 +5,51 @@ WORKDIR /usr/src/app
 
 RUN apt-get update && apt-get install -y build-essential python3
 
+# SSL cert install
 
+# Install basic dependencies
+RUN apt-get update && apt-get install -y wget && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Define Miniconda version
+ARG CONDA_VERSION="latest"
+ENV MINICONDA_VERSION=${CONDA_VERSION}
+ENV CONDA_DIR /opt/conda
+
+# Download and install Miniconda
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${MINICONDA_VERSION}-Linux-x86_64.sh -O ~/miniconda.sh && \
+    /bin/bash ~/miniconda.sh -b -p $CONDA_DIR && \
+    rm ~/miniconda.sh && \
+    echo ". $CONDA_DIR/etc/profile.d/conda.sh" >> ~/.bashrc && \
+    echo "conda activate base" >> ~/.bashrc
+
+# Add Conda to PATH
+ENV PATH=$CONDA_DIR/bin:$PATH
+
+# Create a new Conda environment
+RUN conda create -y --name py311 python=3.11
+
+COPY nvidia.pem /tmp/nvidia.pem
+
+# Activate the new environment by default when starting a container
+ENV CONDA_DEFAULT_ENV=py311
+ENV CONDA_PREFIX=$CONDA_DIR/envs/$CONDA_DEFAULT_ENV
+ENV PATH=$CONDA_PREFIX/bin:$PATH
+
+# Add initialization of the py311 environment to the bashrc for interactive shells
+RUN echo "conda activate py311" >> ~/.bashrc && \
+    /bin/bash -c "source $CONDA_DIR/etc/profile.d/conda.sh && conda activate py311" && \
+    mkdir /usr/share/ca-certificates/nvidia && \
+    cp /tmp/nvidia.pem /usr/share/ca-certificates/nvidia  \
+    && /opt/conda/envs/py311/bin/pip install -q requests jupyterlab \
+    && /opt/conda/envs/py311/bin/pip uninstall -y certifi \
+    && echo nvidia/nvidia.pem >> /etc/ca-certificates.conf \
+    && update-ca-certificates \
+    && apt-get update \
+    && apt-get install -y python3-certifi \
+    && ln -s /usr/lib/python3/dist-packages/certifi /opt/conda/envs/py311/lib/python3.11/site-packages/certifi \
+    && mkdir -p /workspace
 
 # RUN npx nx run-many --target=build --all
 
@@ -77,3 +121,5 @@ COPY config/nginx.conf.template /var/nginx/conf/nginx.conf.template
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["nginx", "-p", "/var/nginx",  "-e", "/var/nginx/logs/error.log"]
+
+# EXPOSE 3000

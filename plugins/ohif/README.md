@@ -9,6 +9,8 @@
 - `sudo sh requirements.sh` (installs yarn and nginx)
 
 ### Development setup
+Before building the OHIF, make sure the `nginx.conf.template` is correctly set. For a service server with real IP, set the proxy header Host to $host, for security purposes, set the proxy host  `proxy_set_header   Host   ${MONAI_SERVICE_URI};`. The `MONAI_SERVICE_URI` can be a pure IP or hostname, such as: `api-ea2.tao.stg.ngc.nvidia.com:443`.
+
 ```
 make dev
 ```
@@ -45,7 +47,7 @@ NGC_API_KEY=<API_KEY>
 
 docker run --rm -ti -p 3000:3000 \
   -e DICOM_WEB_URI=http://${HOST_IP}:8042/ \
-  -e MONAI_SERVICE_URI=http://${HOST_IP}:8008/api/v1/ \
+  -e MONAI_SERVICE_URI=${HOST_IP}:8008 \
   -e MONAI_SERVICE_USER_ID=9967f4fc-5a63-11ee-8c99-0242ac120002 \
   -e MONAI_SERVICE_DATASET_ID=77793b86-71b8-4b55-a53c-de9af4fc7ec5 \
   -e DICOM_WEB_AUTH="Basic `echo -n 'user:passwd' | base64`" \
