@@ -224,10 +224,10 @@ export default class MonaiServicePanel extends Component {
     }
     
 
-    const datasets = await this.client().list_datasets();
+    // const datasets = await this.client().list_datasets();
     const info = {
       models: filtered,
-      datasets: datasets.data,
+      // datasets: datasets.data,
       modelLabelToIdxMap: modelLabelToIdxMap,
       modelIdxToLabelMap: modelIdxToLabelMap,
       modelLabelNames: modelLabelNames,
