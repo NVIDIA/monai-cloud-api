@@ -116,11 +116,13 @@ export default class MonaiServicePanel extends Component {
       title: 'MONAI Service',
       message: 'Connecting to MONAI Service',
       type: 'info',
-      duration: 2000,
+      duration: 4000,
     });
+    // const response_0 = await this.client().get_token();
+    // console.log(response_0.data)
 
     const response = await this.client().list_models();
-    console.log(response.data)
+    console.log('list models:', response)
 
     hideNotification(nid, this.notification);
     if (response.status !== 200) {
@@ -137,7 +139,7 @@ export default class MonaiServicePanel extends Component {
       title: 'MONAI Service',
       message: 'Connected to MONAI Service Server - Successful',
       type: 'success',
-      duration: 2000,
+      duration: 5000,
     });
 
     // Cache this series at MONAI Service (This can be moved to when you load the series)
@@ -222,10 +224,10 @@ export default class MonaiServicePanel extends Component {
     }
     
 
-    const datasets = await this.client().list_datasets();
+    // const datasets = await this.client().list_datasets();
     const info = {
       models: filtered,
-      datasets: datasets.data,
+      // datasets: datasets.data,
       modelLabelToIdxMap: modelLabelToIdxMap,
       modelIdxToLabelMap: modelIdxToLabelMap,
       modelLabelNames: modelLabelNames,
