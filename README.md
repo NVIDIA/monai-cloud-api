@@ -15,11 +15,15 @@ The NVIDIA MONAI Cloud APIs offer a comprehensive suite of tools designed to enh
    - A robust foundation model, trained on 117 classes encompassing various organs and tumors.
    - The model's training and validation involved CT images from over 4,000 patients, ensuring its high accuracy and reliability for medical image analysis.
 
-4. OHIF Plugin and Overviews:
+4. Dicon-web Setup and Dataset Configuration:
+   - [Dicom-web Overview](#dicomweb-overview)
+   - [Notebook: Dataset Creation and Experiment Selection](https://github.com/NVIDIA/monai-cloud-api/blob/main/notebooks/Dataset%20Creation%20and%20Experiment%20Selection.ipynb)
+
+5. OHIF Plugin and Overview:
    - [Getting Started with OHIF Plugin](#getting-started-with-ohif-plugin)
    - [Setup Customized OHIF ](https://github.com/NVIDIA/monai-cloud-api/tree/main/plugins/ohif)
    - [OHIF Applications and UI Demo](#basic-ohif-instruction)
-   - [Interactive Annotation]()
+   - [Interactive Annotation](#interactive-annotation)
    - [Notebook: Annotation and OHIF Overview](https://github.com/NVIDIA/monai-cloud-api/blob/main/notebooks/Annotation%20and%20Continuous%20Learning%20Overview.ipynb)
 
 
@@ -32,6 +36,62 @@ To begin using the NVIDIA MONAI Cloud APIs, you can sign up for early access by 
 MONAI Service provide ready-to-use playgroundw with API server and applications for users. 
 If you are going to build and custimize OHIF viewer and MONAI Service plugin. Please refer to the [setup page](https://github.com/NVIDIA/monai-cloud-api/tree/main/plugins/ohif)
 
+### Dicomweb Overview
+Dataset storage can be variant, in the open-sourced setup. We recommend Orthanc for hosting dicom format medical images. 
+
+### **Data Sources**
+
+To create dataset, then you ready to create a reference object to that dataset by utilizing DICOMWeb. 
+DICOMWeb is a modern web standard for accessing DICOM data. 
+By connecting NVIDIA MONAI Cloud APIs to a DICOMWeb endpoint, 
+you can seamlessly integrate to your data into many modern viewers.
+
+In MONAI Service playground, it will automatically deploy Orthanc dicom-web server. 
+For customized setup for Orthanc, 
+
+**Steps:**
+
+```bash
+# Install Orthanc and DICOMweb plugin
+sudo apt-get install orthanc orthanc-dicomweb -y
+
+# Install Plastimatch
+sudo apt-get install plastimatch -y
+```
+
+Upgrade to the latest version by following the steps mentioned on the [Orthanc Installation Guide](https://book.orthanc-server.com/users/debian-packages.html#replacing-the-package-from-the-service-by-the-lsb-binaries)
+
+```bash
+sudo service orthanc stop
+sudo wget https://lsb.orthanc-server.com/orthanc/1.9.7/Orthanc --output-document /usr/sbin/Orthanc
+sudo rm -f /usr/share/orthanc/plugins/*.so
+
+sudo wget https://lsb.orthanc-server.com/orthanc/1.9.7/libServeFolders.so --output-document /usr/share/orthanc/plugins/libServeFolders.so
+sudo wget https://lsb.orthanc-server.com/orthanc/1.9.7/libModalityWorklists.so --output-document /usr/share/orthanc/plugins/libModalityWorklists.so
+sudo wget https://lsb.orthanc-server.com/plugin-dicom-web/1.6/libOrthancDicomWeb.so --output-document /usr/share/orthanc/plugins/libOrthancDicomWeb.so
+
+sudo service orthanc restart
+```
+
+```
+dicom_web_endpoint = ...
+dicom_client_id = ...
+dicom_client_secret = ...
+```
+
+After setup, you can use the Orthanc browser located at http://127.0.0.1:8042/app/explorer.html#upload to upload files.
+if the dicomweb needs a credentials setup, please refer to [Orthanc Guide](https://orthanc.uclouvain.be/book/users/configuration.html)
+Open the configuration.json and change credentials: 
+```
+// Whether or not the password protection is enabled
+"AuthenticationEnabled" : true,
+
+// The list of the registered users. Because Orthanc uses HTTP
+// Basic Authentication, the passwords are stored as plain text.
+"RegisteredUsers" : {
+  "user": "pass"
+}
+```
 
 ### Basic OHIF Instruction
 
