@@ -19,6 +19,7 @@ The NVIDIA MONAI Cloud APIs offer a comprehensive suite of tools designed to enh
    - [Getting Started with OHIF Plugin](#getting-started-with-ohif-plugin)
    - [Setup Customized OHIF ](https://github.com/NVIDIA/monai-cloud-api/tree/main/plugins/ohif)
    - [OHIF Applications and UI Demo](#basic-ohif-instruction)
+   - [Interactive Annotation]()
    - [Notebook: Annotation and OHIF Overview](https://github.com/NVIDIA/monai-cloud-api/blob/main/notebooks/Annotation%20and%20Continuous%20Learning%20Overview.ipynb)
 
 
@@ -105,3 +106,40 @@ The associated API call run when you click the `Notify Server` button is below:
 After finishing the current image, click next image button to load the next selected image using
 active learning.
 ![study list](docs/doc_imgs/nextimage.png)
+
+
+### Interactive Annotation
+MONAI Service supports multiple applications such as VISTA and DeepEdit, VISTA model contains two interactive mode:
+point prompt and class prompt. DeepEdit has only the point prompt interactive annotation. 
+
+#### **Interactive Mode: Point Prompt**
+
+Use mouse and click to place the control points within medical images. 
+In OHIF MONAI Service plugin, user can use point prompts by clicking the
+**Point Prompts**:
+You can see availabel organs in the panel, select one anatomy for point
+editing. After selecting, users can place points in any viewer planes. The point color is the same with the 
+available organs. 
+
+![study list](docs/doc_imgs/inference_point.png)
+
+Click **Run** after the click the points for AI based inference.
+
+![study list](docs/doc_imgs/inference_point_res.png)
+
+User can get the real-time prompt response for the point edits.
+
+**Class Prompts**:
+
+The class prompts is used when inference and annotating specific anatomies, VISTA model supprts more
+ than 100 organs, bones, muscles, etc. Users can selecte one or multiple targets for AI inference. 
+
+Select the anatomy by checking the checkbox table:
+
+![study list](docs/doc_imgs/inference_class_prompts.png)
+
+Click **Run** after the classes checkbox for AI based inference.
+
+![study list](docs/doc_imgs/inference_class_prompts_res.png)
+
+User can get the real-time prompt response for the class edits.
