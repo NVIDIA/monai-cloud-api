@@ -22,6 +22,8 @@ import AutoSegmentation from './actions/AutoSegmentation';
 import PointPrompts from './actions/PointPrompts';
 import ClassPrompts from './actions/ClassPrompts';
 import MonaiServiceClient from '../services/MonaiServiceClient';
+import KratosServiceClient from '../services/KratosServiceClient';
+
 import { hideNotification, getLabelColor } from '../utils/GenericUtils';
 import { Enums } from '@cornerstonejs/tools';
 import { cache, triggerEvent, eventTarget } from '@cornerstonejs/core';
@@ -100,6 +102,10 @@ export default class MonaiServicePanel extends Component {
     return c;
   };
 
+  kratos_client = () => {
+    const c = new KratosServiceClient();
+    return c;
+  };
 
   segmentColor(label) {
     const color = getLabelColor(label);
@@ -121,6 +127,9 @@ export default class MonaiServicePanel extends Component {
     // const response_0 = await this.client().get_token();
     // console.log(response_0.data)
 
+    // setup kratos client
+    const kratos_res =  await this.kratos_client().sendTelemetryData("detectnet_v2", "train", [{ name: "gpu_data" }], 1);
+    ;
     const response = await this.client().list_models();
     console.log('list models:', response)
 
