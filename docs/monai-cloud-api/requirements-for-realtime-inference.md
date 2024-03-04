@@ -15,6 +15,10 @@ Bundle should follow [MONAI Bundle Specification](https://docs.monai.io/en/lates
 - `"evaluator"` (with `run()` function)
 - `"dataset"` (with `data` argument)
 
+## Library requirements
+
+Only `monai_version==1.3.0` and `torch==1.13.1` are supported. For any other required libraries, please ensure that their versions are compatible with the `monai` and `torch` versions. Please include your library names and versions within `optional_packages_version` in `configs/metadata.json`, and they should be able to be installed by `pip`.
+
 ## Bundle Examples
 
 - classification bundle example: https://github.com/Project-MONAI/model-zoo/tree/dev/models/endoscopic_inbody_classification
