@@ -26,11 +26,11 @@ jobs:
 
     - name: Build docs
       run: |
-        sphinx-build -M html monai-cloud-api/ build/html
+        sphinx-build -M html docs/monai-cloud-api/ docs/build/html
 
     - name: Deploy to dist branch
       run: |
         git checkout -b dist
-        git add -f build/html
+        git add -f docs/build/html
         git commit -m "Deploy Sphinx documentation to dist branch"
         git push origin dist
