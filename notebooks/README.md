@@ -8,10 +8,11 @@ Welcome to the MONAI Cloud API Notebook Collection. This repository contains a s
 - [Generating and Managing Your Credentials.ipynb](Generating%20and%20Managing%20Your%20Credentials.ipynb)
 - [Dataset Creation and Model Selection.ipynb](Dataset%20Creation%20and%20Model%20Selection.ipynb)
 - [Perform Real-time Inference.ipynb](./Perform%20Real-time%20Inference.ipynb)
+- [Perform Real-time Inference with a Custom MONAI Bundle.ipynb](./Perform%20Real-time%20Inference%20with%20a%20Custom%20MONAI%20Bundle.ipynb)
 - [Training a MONAI Segmentation Bundle.ipynb](Training%20a%20MONAI%20Segmentation%20Bundle.ipynb)
 - [Training a Custom MONAI Bundle.ipynb](Training%20a%20Custom%20MONAI%20Bundle.ipynb)
 - [Working with MONAI Auto3DSeg using MONAI Cloud API.ipynb](Working%20with%20MONAI%20Auto3DSeg%20using%20MONAI%20Cloud%20API.ipynb)
-- [Annotation and Continuous Learning Overview.ipynb](Annotation%20and%20Continuous%20Learning%20Overview.ipynb)
+- [Annotation and Continual Learning Overview.ipynb](Annotation%20and%20Continual%20Learning%20Overview.ipynb)
 
 
 ## How to Use
