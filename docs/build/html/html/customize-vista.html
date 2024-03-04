@@ -1,0 +1,552 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customize VISTA-3D &#8212; NVIDIA MONAI Cloud APIs</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="https://js.hcaptcha.com/1/api.js"></script>
+    <script src="//assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="_static/design-tabs.js"></script>
+    <link rel="canonical" href="https://docs.nvidia.com/monai-cloud-api/0.1.0/customize-vista.html" />
+    <link rel="shortcut icon" href="_static/nvidia-logo-vert-rgb-blk-for-screen.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Debugging" href="debugging.html" />
+    <link rel="prev" title="Build and Configure OHIF" href="install-and-configure-reference-viewer.html" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+      
+<style type="text/css">
+  ul.ablog-archive {
+    list-style: none;
+    overflow: auto;
+    margin-left: 0px;
+  }
+  ul.ablog-archive li {
+    float: left;
+    margin-right: 5px;
+    font-size: 80%;
+  }
+  ul.postlist a {
+    font-style: italic;
+  }
+  ul.postlist-style-disc {
+    list-style-type: disc;
+  }
+  ul.postlist-style-none {
+    list-style-type: none;
+  }
+  ul.postlist-style-circle {
+    list-style-type: circle;
+  }
+</style>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/nvidia-logo-horiz-rgb-blk-for-screen.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">NVIDIA MONAI Cloud APIs</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="quickstart.html">
+   Quickstart Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks.html">
+   Jupyter Notebooks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="interactive-annotation-vista.html">
+   Interactive Annotation with VISTA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="training-your-first-model.html">
+   Training Your First Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="auto3dseg-walkthrough.html">
+   Auto3DSeg Walkthrough
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  How-to Guides
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="api-authentication.html">
+   Authentication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="install-and-configure-reference-viewer.html">
+   Build and Configure OHIF
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Customize VISTA-3D
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="debugging.html">
+   Debugging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dataset-storage.html">
+   Dataset Storage
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mlflow.html">
+   MLFlow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="navigating-dashboard.html">
+   NGC Dashboard
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="realtime-inference.html">
+   Realtime Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="setting-up-dicomweb.html">
+   Setting up a DICOMWeb Server
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="starting-annotation-dashboard.html">
+   Start Interactive Annotation using Dashboard
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="using-ohif-and-vista.html">
+   Using OHIF Plugin and VISTA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="viewer-integration.html">
+   Viewer Integration
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="faq.html">
+   FAQ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="validated-models.html">
+   Supported Bundles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="swagger.html">
+   Swagger
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="end-user-license-agreement.html">
+   EULA
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#base-vista-3d">
+   Base VISTA-3D
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#customize-vista-3d-experiment">
+   Customize VISTA-3D Experiment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#selecting-a-subset-of-classes">
+   Selecting a Subset of Classes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-custom-classes">
+   Adding Custom Classes
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Customize VISTA-3D</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#base-vista-3d">
+   Base VISTA-3D
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#customize-vista-3d-experiment">
+   Customize VISTA-3D Experiment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#selecting-a-subset-of-classes">
+   Selecting a Subset of Classes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-custom-classes">
+   Adding Custom Classes
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                 <div class="tex2jax_ignore mathjax_ignore section" id="customize-vista-3d">
+<h1>Customize VISTA-3D<a class="headerlink" href="#customize-vista-3d" title="Permalink to this headline">#</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="base-vista-3d">
+<h2>Base VISTA-3D<a class="headerlink" href="#base-vista-3d" title="Permalink to this headline">#</a></h2>
+<p>MONAI Bundle: We’re using the VISTA-3D bundle as an example. Choose the one fitting your application.
+Dataset Setup: All data is under one dataset ID for this demo. Adjust as per your data structure.
+Pretrained Weights: Opt for a pretrained model to enhance performance.
+Real-time Inference: For real-time inference during annotation jobs or auto segmentation, set realtime_infer to True and provide an inference_dataset; otherwise, set it to False. In this example, we’re setting it to False as we aren’t initiating an annotation job…</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;monai_vista&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Based on vista&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;network_arch&quot;</span><span class="p">:</span> <span class="s2">&quot;monai_vista3d&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;medical&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;base_experiment&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="n">ptm_vista</span> <span class="p">],</span>
+  <span class="s2">&quot;inference_dataset&quot;</span><span class="p">:</span> <span class="n">dataset_id</span><span class="p">,</span>
+  <span class="s2">&quot;eval_dataset&quot;</span><span class="p">:</span> <span class="n">dataset_id</span><span class="p">,</span>
+  <span class="s2">&quot;train_datasets&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="n">dataset_id</span> <span class="p">],</span>
+  <span class="s2">&quot;realtime_infer&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/experiments&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Create experiment failed, got </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">experiment_id</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+<span class="n">model_network</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;network_arch&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Experiment creation succeeded with experiment ID:&quot;</span><span class="p">,</span> <span class="n">experiment_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---------------------------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="customize-vista-3d-experiment">
+<h2>Customize VISTA-3D Experiment<a class="headerlink" href="#customize-vista-3d-experiment" title="Permalink to this headline">#</a></h2>
+<p>The VISTA-3D model provides a comprehensive set of 117 classes. However, there might be scenarios where you need a subset of these classes or want to introduce new ones. Customizing is made easy with the MONAI Cloud APIs:</p>
+</div>
+<div class="section" id="selecting-a-subset-of-classes">
+<h2>Selecting a Subset of Classes<a class="headerlink" href="#selecting-a-subset-of-classes" title="Permalink to this headline">#</a></h2>
+<p>If you’re interested in specific classes such as liver, kidney, and spleen, you can choose them without using the entire set by modifying the data object to add a model_params key, along with the labels you want included from the base 117 classes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;my_vista_3_organ&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;based on vista&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;network_arch&quot;</span><span class="p">:</span> <span class="s2">&quot;monai_vista3d&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;base_experiment&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="n">ptm_vista</span> <span class="p">],</span>
+  <span class="s2">&quot;inference_dataset&quot;</span><span class="p">:</span> <span class="n">dataset_id</span><span class="p">,</span>
+  <span class="s2">&quot;eval_dataset&quot;</span><span class="p">:</span> <span class="n">dataset_id</span><span class="p">,</span>
+  <span class="s2">&quot;train_datasets&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="n">dataset_id</span> <span class="p">],</span>
+  <span class="s2">&quot;realtime_infer&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+  <span class="s2">&quot;model_params&quot;</span><span class="p">:{</span>
+      <span class="s2">&quot;labels&quot;</span><span class="p">:{</span>
+          <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;liver&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;kidney&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="s2">&quot;spleen&quot;</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-custom-classes">
+<h2>Adding Custom Classes<a class="headerlink" href="#adding-custom-classes" title="Permalink to this headline">#</a></h2>
+<p>If you have specific classes not present in the base VISTA-3D model, you can easily add them. This customization allows developers to tailor the experiment to their specific needs, ensuring that only relevant classes are present, while also offering the flexibility to introduce new classes as needed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;model_params&quot;</span><span class="p">:{</span>
+      <span class="s2">&quot;labels&quot;</span><span class="p">:{</span>
+          <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;liver&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;kidney&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;118&quot;</span><span class="p">:</span> <span class="s2">&quot;myorgan&quot;</span> <span class="c1"># add customized class</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+<div class="section">
+   
+</div>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="install-and-configure-reference-viewer.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Build and Configure OHIF</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="debugging.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Debugging</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By NVIDIA<br/>
+  
+      &copy; Copyright 2024 NVIDIA CORPORATION &amp; AFFILIATES. All rights reserved.<br/>
+    Last updated on Mar 04, 2024.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

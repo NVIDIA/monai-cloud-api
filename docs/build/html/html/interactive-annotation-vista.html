@@ -1,0 +1,838 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Annotation with VISTA &#8212; NVIDIA MONAI Cloud APIs</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="https://js.hcaptcha.com/1/api.js"></script>
+    <script src="//assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="_static/design-tabs.js"></script>
+    <link rel="canonical" href="https://docs.nvidia.com/monai-cloud-api/0.1.0/interactive-annotation-vista.html" />
+    <link rel="shortcut icon" href="_static/nvidia-logo-vert-rgb-blk-for-screen.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Training Your First Model" href="training-your-first-model.html" />
+    <link rel="prev" title="Jupyter Notebooks" href="notebooks.html" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+      
+<style type="text/css">
+  ul.ablog-archive {
+    list-style: none;
+    overflow: auto;
+    margin-left: 0px;
+  }
+  ul.ablog-archive li {
+    float: left;
+    margin-right: 5px;
+    font-size: 80%;
+  }
+  ul.postlist a {
+    font-style: italic;
+  }
+  ul.postlist-style-disc {
+    list-style-type: disc;
+  }
+  ul.postlist-style-none {
+    list-style-type: none;
+  }
+  ul.postlist-style-circle {
+    list-style-type: circle;
+  }
+</style>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/nvidia-logo-horiz-rgb-blk-for-screen.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">NVIDIA MONAI Cloud APIs</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="quickstart.html">
+   Quickstart Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks.html">
+   Jupyter Notebooks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Interactive Annotation with VISTA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="training-your-first-model.html">
+   Training Your First Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="auto3dseg-walkthrough.html">
+   Auto3DSeg Walkthrough
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  How-to Guides
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="api-authentication.html">
+   Authentication
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="install-and-configure-reference-viewer.html">
+   Build and Configure OHIF
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="customize-vista.html">
+   Customize VISTA-3D
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="debugging.html">
+   Debugging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dataset-storage.html">
+   Dataset Storage
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mlflow.html">
+   MLFlow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="navigating-dashboard.html">
+   NGC Dashboard
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="realtime-inference.html">
+   Realtime Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="setting-up-dicomweb.html">
+   Setting up a DICOMWeb Server
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="starting-annotation-dashboard.html">
+   Start Interactive Annotation using Dashboard
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="using-ohif-and-vista.html">
+   Using OHIF Plugin and VISTA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="viewer-integration.html">
+   Viewer Integration
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="faq.html">
+   FAQ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="validated-models.html">
+   Supported Bundles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="swagger.html">
+   Swagger
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="end-user-license-agreement.html">
+   EULA
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-and-experiment-setup">
+   Dataset and Experiment Setup
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#authentication">
+     Authentication
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dataset-creation">
+     Dataset Creation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-an-experiment">
+     Creating an Experiment
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#continual-learning-and-inference">
+   Continual Learning and Inference
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configure-the-continous-learning-job">
+     Configure the Continous Learning Job
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#continual-learning-status">
+     Continual Learning Status
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-inference">
+     Run Inference
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#notify-api">
+     Notify API
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#repeat">
+     Repeat
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cleaning-up-your-continuous-learning">
+   Cleaning Up Your Continuous Learning
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stopping-a-continuous-learning-job">
+     Stopping a Continuous Learning Job¶
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stopping-real-time-inference">
+     Stopping Real-time inference
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Interactive Annotation with VISTA</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-and-experiment-setup">
+   Dataset and Experiment Setup
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#authentication">
+     Authentication
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dataset-creation">
+     Dataset Creation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-an-experiment">
+     Creating an Experiment
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#continual-learning-and-inference">
+   Continual Learning and Inference
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configure-the-continous-learning-job">
+     Configure the Continous Learning Job
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#continual-learning-status">
+     Continual Learning Status
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-inference">
+     Run Inference
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#notify-api">
+     Notify API
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#repeat">
+     Repeat
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cleaning-up-your-continuous-learning">
+   Cleaning Up Your Continuous Learning
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stopping-a-continuous-learning-job">
+     Stopping a Continuous Learning Job¶
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stopping-real-time-inference">
+     Stopping Real-time inference
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                 <div class="tex2jax_ignore mathjax_ignore section" id="interactive-annotation-with-vista">
+<h1>Interactive Annotation with VISTA<a class="headerlink" href="#interactive-annotation-with-vista" title="Permalink to this headline">#</a></h1>
+<p>This guide delves deep into the process of annotation and continuous learning using NVIDIA MONAI Cloud APIs. Accurate annotations are crucial as the foundation of medical imaging, and the continuous refinement of models ensures the best outcomes over time. We will guide you through the steps and considerations involved in this process.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<p>Annotation and Continuous Learning are pivotal features of NVIDIA MONAI Cloud APIs, designed to streamline the refinement of datasets and enhance model performance progressively. This section introduces the concepts of setting up and optimizing annotation and continuous learning tasks for your projects, highlighting their importance in improving the accuracy and efficiency of medical image analysis.</p>
+</div>
+<div class="section" id="dataset-and-experiment-setup">
+<h2>Dataset and Experiment Setup<a class="headerlink" href="#dataset-and-experiment-setup" title="Permalink to this headline">#</a></h2>
+<p>Creating a dataset and an experiment is the first step in the annotation workflow. Using the realtime_infer parameter during experiment creation ensures the experiment is immediately ready for annotation and continuous learning tasks. This section explains how to set up your dataset and experiments correctly, ensuring a smooth start to your annotation workflow.</p>
+<div class="section" id="authentication">
+<h3>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">#</a></h3>
+<p>Before interacting with the APIs, authentication is required to secure access and manage user sessions. The following Python code demonstrates how to authenticate against the NVIDIA MONAI Cloud API service, retrieve a user token, and set up the necessary headers for subsequent API requests. This step is crucial for establishing a secure connection and ensuring that your API requests are authenticated.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># API Endpoint and Credentials</span>
+<span class="n">host_url</span> <span class="o">=</span> <span class="s2">&quot;https://api.monai.ngc.nvidia.com&quot;</span>
+<span class="n">ngc_api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MONAI_API_KEY&#39;</span><span class="p">)</span>
+
+<span class="c1"># Authenticate and retrieve user ID and token</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;ngc_api_key&quot;</span><span class="p">:</span> <span class="n">ngc_api_key</span><span class="p">})</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">host_url</span><span class="si">}</span><span class="s2">/api/v1/login&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">,</span> <span class="s2">&quot;Login failed with status code: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="n">user_details</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">user_id</span><span class="p">,</span> <span class="n">token</span> <span class="o">=</span> <span class="n">user_details</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">],</span> <span class="n">user_details</span><span class="p">[</span><span class="s2">&quot;token&quot;</span><span class="p">]</span>
+
+<span class="c1"># Headers for subsequent API requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Bearer </span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dataset-creation">
+<h3>Dataset Creation<a class="headerlink" href="#dataset-creation" title="Permalink to this headline">#</a></h3>
+<p>Creating a dataset is the first step in the annotation process. This section demonstrates how to define a dataset within the NVIDIA MONAI Cloud APIs, specifying its type, format, and the DICOMWeb server credentials. This setup is essential for storing and accessing your medical imaging data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># DICOMWeb Server</span>
+<span class="n">dicom_web_endpoint</span> <span class="o">=</span> <span class="s2">&quot;&lt;DICOMWeb address&gt;&quot;</span> <span class="c1"># For example &quot;http://127.0.0.1:8042/dicom-web&quot;.</span>
+<span class="n">dicom_client_id</span> <span class="o">=</span> <span class="s2">&quot;&lt;DICOMWeb user ID&gt;&quot;</span>    <span class="c1"># If Authentication is enabled, then provide username</span>
+<span class="n">dicom_client_secret</span> <span class="o">=</span> <span class="s2">&quot;&lt;DICOMWeb secret&gt;&quot;</span> <span class="c1"># If Authentication is enabled, then provide password</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;mydataset&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;a demo dataset&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;semantic_segmentation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;monai&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;client_url&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dicom_web_endpoint</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;client_id&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dicom_client_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;client_secret&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dicom_client_secret</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/datasets&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Create dataset failed, got </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">dataset_id</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dataset creation succeeded with dataset ID: &quot;</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-an-experiment">
+<h3>Creating an Experiment<a class="headerlink" href="#creating-an-experiment" title="Permalink to this headline">#</a></h3>
+<p>This section covers the creation of an experiment, which is necessary for setting up the environment for annotation and continuous learning. It includes selecting the appropriate model architecture and configuring the experiment with datasets for training, evaluation, and inference.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/experiments&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;List Base Experiment failed, got </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="c1"># VISTA-3D</span>
+<span class="n">ptm_vista</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">res</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;network_arch&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;monai_vista3d&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;base_experiment&quot;</span><span class="p">])][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Base Experiment ID for VISTA Experiment: </span><span class="si">{</span><span class="n">ptm_vista</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+<span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;my_vista&quot;</span><span class="p">,</span>
+<span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;based on vista&quot;</span><span class="p">,</span>
+<span class="s2">&quot;network_arch&quot;</span><span class="p">:</span> <span class="s2">&quot;monai_vista3d&quot;</span><span class="p">,</span>
+<span class="s2">&quot;base_experiment&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="n">ptm_vista</span> <span class="p">],</span>
+<span class="s2">&quot;inference_dataset&quot;</span><span class="p">:</span> <span class="n">dataset_id</span><span class="p">,</span>
+<span class="s2">&quot;eval_dataset&quot;</span><span class="p">:</span> <span class="n">dataset_id</span><span class="p">,</span>
+<span class="s2">&quot;train_datasets&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="n">dataset_id</span> <span class="p">],</span>
+<span class="s2">&quot;realtime_infer&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="c1"># Auto loads MONAI bundle and enables real-time inference</span>
+<span class="s2">&quot;model_params&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;liver&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;kidney&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="s2">&quot;spleen&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="s2">&quot;pancreas&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;5&quot;</span><span class="p">:</span> <span class="s2">&quot;right kidney&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/experiments&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Create experiment failed, got </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">experiment_id</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+<span class="n">model_network</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;network_arch&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Experiment creation succeeded with experiment ID:&quot;</span><span class="p">,</span> <span class="n">experiment_id</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="continual-learning-and-inference">
+<h2>Continual Learning and Inference<a class="headerlink" href="#continual-learning-and-inference" title="Permalink to this headline">#</a></h2>
+<div class="section" id="configure-the-continous-learning-job">
+<h3>Configure the Continous Learning Job<a class="headerlink" href="#configure-the-continous-learning-job" title="Permalink to this headline">#</a></h3>
+<p>Continuous learning forms the foundation of maintaining the accuracy and relevance of our models over time. As new data is annotated, the model can adapt and refine its performance. However, to initiate this process effectively, certain parameters must be defined to guide the system on how and when to refine the model.</p>
+<p>This job initiates the fine-tuning of the model with new labeled samples after receiving several notifications. A finely tuned model enhances annotation efficiency and can yield improved annotation results.</p>
+<p>Note: If you prefer to solely annotate data without engaging in the continuous learning process, you can choose to skip this step. You will still be able to utilize the annotation tools and workflows outlined in the upcoming sections independently.</p>
+<p>Parameter Details:</p>
+<ul class="simple">
+<li><p>round_size: Specifies the number of new annotations required to trigger a new round of fine-tuning for the model.</p></li>
+<li><p>stop_criteria: Criteria determining when the continuous learning job should terminate.</p></li>
+<li><p>max_rounds: Sets the maximum number of rounds the job should run.</p></li>
+<li><p>key_metric: (Optional) If specified, the job will continue running until the designated evaluation metric reaches the specified value.</p></li>
+<li><p>train_spec: Overrides specific parameters in the model for this particular training. If you have an MLflow server configured, you can include its parameters under tracking to enable logging metrics with MLflow.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">train_spec</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;epochs&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;val_interval&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;annotation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;specs&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;round_size&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1"># Notify at least 2 different image_ids</span>
+        <span class="s2">&quot;stop_criteria&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;max_rounds&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;key_metric&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;train_spec&quot;</span><span class="p">:</span> <span class="n">train_spec</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/experiments/</span><span class="si">{</span><span class="n">experiment_id</span><span class="si">}</span><span class="s2">/jobs&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Run job failed, got </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span>
+<span class="n">cl_job_id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Job creation succeeded with job ID: &quot;</span><span class="p">,</span> <span class="n">cl_job_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="continual-learning-status">
+<h3>Continual Learning Status<a class="headerlink" href="#continual-learning-status" title="Permalink to this headline">#</a></h3>
+<p>Monitoring the status of the continuous learning job is essential for understanding its progress and determining when interventions might be necessary. This section provides a method for querying the job status, helping you stay informed about the ongoing learning process.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Pending&quot;</span>
+<span class="k">while</span> <span class="n">status</span> <span class="o">!=</span> <span class="s2">&quot;Running&quot;</span><span class="p">:</span>
+    <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/experiments/</span><span class="si">{</span><span class="n">experiment_id</span><span class="si">}</span><span class="s2">/jobs/</span><span class="si">{</span><span class="n">cl_job_id</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Failed to get job status, got </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Continuous Learning/Annotation Job status: &quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-inference">
+<h3>Run Inference<a class="headerlink" href="#run-inference" title="Permalink to this headline">#</a></h3>
+<p>This section explains how to run inference with the VISTA-3D model, which supports 118 classes. Start by using the /nextimage API to retrieve the next image in line for annotation. After obtaining the image, trigger an inference job by providing the image and the necessary inference parameters. This step allows you to apply the model’s wide range of classes to your dataset for analysis and classification purposes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># get an inference image id with nextimage api</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;nextimage&quot;</span>
+    <span class="p">}</span>
+    <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/datasets/</span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">/jobs&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Recommend image failed, got </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">inference_image_id</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;image&quot;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommended Image to annotate: </span><span class="si">{</span><span class="n">inference_image_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;inference&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;specs&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="n">inference_image_id</span><span class="p">,</span>
+            <span class="s2">&quot;bundle_params&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;label_prompt&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">118</span><span class="p">))</span>  <span class="c1"># inference all 117 classes</span>
+            <span class="p">},</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/experiments/</span><span class="si">{</span><span class="n">experiment_id</span><span class="si">}</span><span class="s2">/jobs&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Run inference failed, got </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inference Successful.  Label is returned&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="notify-api">
+<h3>Notify API<a class="headerlink" href="#notify-api" title="Permalink to this headline">#</a></h3>
+<p>Once you’ve successfully annotated the image and saved it back to the DICOMWeb server, you can indicate that it’s ready for use in continual learning. Trigger the notify API with the image ID to notify the system that the image is available for training.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># After uploading a DICOM Seg into DICOM Web</span>
+    <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/datasets/</span><span class="si">{</span><span class="n">dataset_id</span><span class="si">}</span><span class="s2">/jobs&quot;</span>
+    <span class="n">label_id</span> <span class="o">=</span> <span class="s2">&quot;&lt;series_id_1&gt;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;notify&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;specs&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;added&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="n">inference_image_id</span><span class="p">,</span>
+                <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">label_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;updated&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;removed&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Notified.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="repeat">
+<h3>Repeat<a class="headerlink" href="#repeat" title="Permalink to this headline">#</a></h3>
+<p>Continue the process for all images in your dataset. With each iteration, not only do you expand your annotated dataset, but you also contribute to the model’s learning, leading to more accurate annotations in future iterations. The more you repeat this process, the more your model will learn and improve, allowing it to better identify and classify different types of images.</p>
+</div>
+</div>
+<div class="section" id="cleaning-up-your-continuous-learning">
+<h2>Cleaning Up Your Continuous Learning<a class="headerlink" href="#cleaning-up-your-continuous-learning" title="Permalink to this headline">#</a></h2>
+<p>As your model continues to learn and improve over time, there may come a point where you need to pause or stop the ongoing Continuous Learning (CL) job. This could be due to a number of reasons, such as satisfactory model performance, resource constraints, or the need to make adjustments to the learning process.</p>
+<div class="section" id="stopping-a-continuous-learning-job">
+<h3>Stopping a Continuous Learning Job¶<a class="headerlink" href="#stopping-a-continuous-learning-job" title="Permalink to this headline">#</a></h3>
+<p>As your model refines itself over time using continuous learning, there might come a point where you need to halt the ongoing CL job. Whether you’re satisfied with the model’s performance or have other reasons, here’s how you can stop the CL job:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Manually stop the CL job. No need to execute this cell if the job has reached the stop criteria.</span>
+<span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/experiments/</span><span class="si">{</span><span class="n">experiment_id</span><span class="si">}</span><span class="s2">/jobs/</span><span class="si">{</span><span class="n">cl_job_id</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;Done&quot;</span><span class="p">:</span>
+    <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/experiments/</span><span class="si">{</span><span class="n">experiment_id</span><span class="si">}</span><span class="s2">/jobs/</span><span class="si">{</span><span class="n">cl_job_id</span><span class="si">}</span><span class="s2">:cancel&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;cancel job failed, got </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stopping-real-time-inference">
+<h3>Stopping Real-time inference<a class="headerlink" href="#stopping-real-time-inference" title="Permalink to this headline">#</a></h3>
+<p>When the experiment is created with <code class="docutils literal notranslate"><span class="pre">realtime_infer</span></code> as <code class="docutils literal notranslate"><span class="pre">True</span></code>, it will reserve one GPU to process the inference requests.</p>
+<p>After we have finished the inference process, we would like to release the GPU resource for other tasks.</p>
+<p>To achieve this, we can switch the <code class="docutils literal notranslate"><span class="pre">realtime_infer</span></code> from <code class="docutils literal notranslate"><span class="pre">True</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>Note: this step is irreversible, which means you can’t set the <code class="docutils literal notranslate"><span class="pre">realtime_infer</span></code> from <code class="docutils literal notranslate"><span class="pre">False</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>. To bootstrap another inference, you will have to create another experiment.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;realtime_infer&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/experiments/</span><span class="si">{</span><span class="n">experiment_id</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;stop job failed, got </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="section">
+   
+</div>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="notebooks.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Jupyter Notebooks</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="training-your-first-model.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Training Your First Model</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By NVIDIA<br/>
+  
+      &copy; Copyright 2024 NVIDIA CORPORATION &amp; AFFILIATES. All rights reserved.<br/>
+    Last updated on Mar 04, 2024.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
