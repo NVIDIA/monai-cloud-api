@@ -17,7 +17,9 @@ Bundle should follow [MONAI Bundle Specification](https://docs.monai.io/en/lates
 
 ## Library requirements
 
-Only `monai_version==1.3.0` and `torch==1.13.1` are supported. For any other required libraries, please ensure that their versions are compatible with the `monai` and `torch` versions. Please include your library names and versions within `optional_packages_version` in `configs/metadata.json`, and they should be able to be installed by `pip`.
+- Bundle should be compatible with `monai==1.3.0` and `torch==1.13.1`.
+- Any other required libraries should be included (names and versions) in `optional_packages_version` in `configs/metadata.json`.
+- All libraries can be installed by `pip`.
 
 ## Bundle Examples
 
