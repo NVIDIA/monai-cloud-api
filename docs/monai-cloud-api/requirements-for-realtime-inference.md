@@ -2,7 +2,7 @@
 
 This guide explains the requirements to prepare a custom bundle for real-time inference using MONAI.
 
-## Bundle Requirements
+### Bundle Requirements
 
 To ensure compatibility, your bundle must adhere to the following requirements:
 
