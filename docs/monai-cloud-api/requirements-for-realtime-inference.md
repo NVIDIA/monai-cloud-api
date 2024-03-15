@@ -45,4 +45,4 @@ To help you understand the structure and components of a MONAI bundle, you can r
 For a detailed, step-by-step walkthrough of using a custom MONAI bundle for real-time inference, refer to the notebook:
 [Perform Real-time Inference with a Custom MONAI Bundle.ipynb](../../notebooks/Perform%20Real-time%20Inference%20with%20a%20Custom%20MONAI%20Bundle.ipynb).
 
-In the "Configuring Experiment to Enable the Real-time Inference" section of the example notebook, you'll need to provide the URL to the location of your custom bundle in the bundle_url parameter when creating an experiment. Replace the URL used in the notebook with the URL pointing to your own bundle.
+In the "Configuring Experiment to Enable the Real-time Inference" section of the example notebook, you'll need to provide the URL to the location of your custom bundle in the `bundle_url` parameter when creating an experiment. Replace the URL used in the notebook with the URL pointing to your own bundle.
