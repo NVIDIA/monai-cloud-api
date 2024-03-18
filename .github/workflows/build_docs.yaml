@@ -1,0 +1,54 @@
+name: Build and Deploy Sphinx Docs
+
+on:
+  push:
+    branches:
+      - integrate_docs
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8  # Adjust the Python version as needed
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends python3-pip python3-dev git git-lfs zip doxygen build-essential unzip wget pandoc ssh fswatch vim tmux zsh
+        pip3 install --upgrade "sphinx>=3.5,<5" "nbclient<0.6,>=0.2" docutils==0.16 ablog myst-nb rst-to-myst nbsphinx==0.8.8 sphinx-book-theme==0.3.2 sphinx-copybutton sphinx-design sphinx-prompt sphinxcontrib-bibtex sphinx-tabs==3.2.0 exhale==0.2.3 breathe==4.14.1 sphinx-sitemap ipython sphinxcontrib-openapi sphinx-autobuild linkify-it-py
+
+    - name: Build docs
+      run: |
+        sphinx-build -M html docs/monai-cloud-api/ docs/build
+
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
+
+    - name: Upload Artifact
+      uses: actions/upload-pages-artifact@v2
+      with:
+        # upload entire directory
+        path: './docs/build/html'
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
