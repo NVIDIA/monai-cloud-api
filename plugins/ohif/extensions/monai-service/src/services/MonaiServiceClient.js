@@ -33,7 +33,10 @@ export default class MonaiServiceClient {
     this.user_id = window.config.monaiService.userId;
     this.dataset_id = window.config.datasetId ? window.config.datasetId : window.config.monaiService.datasetId;
     this.accessToken = window.config.accessToken;
-    this.base_url = `${this.api_endpoint}/users/${this.user_id}`;
+    this.accessToken = "eyJraWQiOiJFUkNPOklCWFY6TjY2SDpOUEgyOjNMRlQ6SENVVToyRkFTOkJJTkw6WkxKRDpNWk9ZOkRVN0o6TVlVWSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJ2cjdoNWY3cmllbTgyNjBmaWk2YTVkbDNjMSIsImF1ZCI6Im5nYyIsImFjY2VzcyI6W10sImlzcyI6ImF1dGhuLm52aWRpYS5jb20iLCJvcHRpb25zIjpbXSwiZXhwIjoxNzEwMzgzNzI0LCJpYXQiOjE3MTAzODMxMjQsImp0aSI6IjllMzU1MDc3LWY5ZDAtNGNiYi05ZjcxLTBhYTE1NDY5MTcwOSJ9.ivqgm-Ob2vuDsVVY3SRtUAbgBOnfffK8Q6afP8Io9lANjsGiDvZEgcumv7t-xPmsL4m4LSI5vEMParjpls5S3wjOIztyOEDnTyxSFTAYrv3QKg2TPhFKg7uHi197l6UsA2qCxs5Fd-Qysv07lEs3gKqnE80H9m90WCx5ZLR__Tgtf9yOk8CWL5tKsHFcX9_ra9GnnUTkhqzXlb57E335B87nHGXcQu0h-cVtTsur-xVcTTgtH_iQhzIdlfr6xv-zqyEKcPo1UMScB9dNdABzUiAhlkuBYdS06-GvV-oNeh_uZ4ZGY-0nyR2OorrccUQQsRGsOWE7M0MX6dbYmniFfwkiDQHSsfTl8AhuV_Iic8kbDqEm24aoXGTQB0dlhI8MNmZ4sR2L0BBuJA1SsQUGJ_vrC4vH_Okg6qAI3iEXMdl01jquH0jEMySdESpORJ6gN2lOuWJGfyrlvK0NbvlW8WaQl7IrV7csqqaRfPuRyop_NidFub7e0iwgN4p6HxJ0JhguXWOboL2dDGZuAuNpZ8nz68KdGkmO9iYHiqhMuJ54ZzVJtX0Z4DXq8JVNdAY-RKB65QIfpv5lZ6gtKBvscHDMfracv-uTjoDuSNVglwtKPtoU98X-7Fs99kVJHpiAJNZmkndYfKvV7z5YWIzDAY-_SbH5WadaT3v-T-Ouk4Y"
+    // this.base_url = `${this.api_endpoint}/users/${this.user_id}`;
+    this.base_url = `${this.api_endpoint}/orgs/iasixjqzw1hj`;
+
     console.log('this base url', this.base_url)
   }
 
@@ -90,10 +93,10 @@ export default class MonaiServiceClient {
       'bundle_params': params,
     };
     const data = {"action": "inference", "specs": inference_specs}
-    console.log(data);
+    console.log('data', data);
     // cache the current annotation in case of recovery loop
     const segVolumeObject = cache.getVolume('monaiservice');
-    console.log(segVolumeObject)
+    console.log('segVolumeObject', segVolumeObject)
     if (segVolumeObject && segVolumeObject.hasOwnProperty('scalarData')) {
       // The 'segVolumeObject' exists and has the 'scalarData' property
       const currentSegArray = new Uint8Array(segVolumeObject.scalarData.length);
@@ -105,6 +108,7 @@ export default class MonaiServiceClient {
 
   api_get(url) {
     console.debug('GET:: ' + url);
+    console.log(this.accessToken)
     if (this.accessToken) {
       axios.defaults.headers.common['Authorization'] = this.accessToken;
     }
@@ -128,6 +132,8 @@ export default class MonaiServiceClient {
 
   api_post(url, body, responseType = 'json') {
     console.log('POST URL', url)
+    console.log(this.accessToken)
+
     if (this.accessToken) {
       axios.defaults.headers.common['Authorization'] = this.accessToken;
     }
@@ -136,6 +142,7 @@ export default class MonaiServiceClient {
     return axios.post(url, body, {
       responseType: responseType,
       headers: {
+        'Authorization': this.accessToken ? `Bearer ${this.accessToken}` : undefined,
         accept: ['application/json', 'multipart/form-data'],
       },
       verify:false
