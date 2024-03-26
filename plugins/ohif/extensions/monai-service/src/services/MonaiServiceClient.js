@@ -112,13 +112,16 @@ export default class MonaiServiceClient {
   api_get(url) {
     console.debug('GET:: ' + url);
     console.log(this.accessToken)
-    if (this.accessToken) {
-      axios.defaults.headers.common['Authorization'] = this.accessToken;
-    }
+    // if (this.accessToken) {
+    //   axios.defaults.headers.common['Authorization'] = this.accessToken;
+    // }
     
     return axios.get(url,{
+      // headers: {
+      // 'Authorization': this.accessToken ? `Bearer ${this.accessToken}` : undefined,
+      // },
       headers: {
-      'Authorization': this.accessToken ? `Bearer ${this.accessToken}` : undefined,
+        'Authorization': undefined,
       },
       verify: false
       })
