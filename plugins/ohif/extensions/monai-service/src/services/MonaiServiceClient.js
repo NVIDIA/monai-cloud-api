@@ -33,7 +33,7 @@ export default class MonaiServiceClient {
     this.user_id = window.config.monaiService.userId;
     this.dataset_id = window.config.datasetId ? window.config.datasetId : window.config.monaiService.datasetId;
     this.accessToken = window.config.accessToken;
-    // this.accessToken = ""
+    this.accessToken = ""
     // this.base_url = `${this.api_endpoint}/users/${this.user_id}`;
     this.base_url = `${this.api_endpoint}/orgs/iasixjqzw1hj`;
 
