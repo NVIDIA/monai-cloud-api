@@ -118,7 +118,7 @@ export default class MonaiServiceClient {
     
     return axios.get(url,{
       headers: {
-      'Authorization': this.accessToken ? `Bearer ${this.accessToken}` : undefined,
+      'Authorization': this.accessToken ? `${this.accessToken}` : undefined,
       },
       verify: false
       })
@@ -145,7 +145,7 @@ export default class MonaiServiceClient {
     return axios.post(url, body, {
       responseType: responseType,
       headers: {
-        'Authorization': this.accessToken ? `Bearer ${this.accessToken}` : undefined,
+        'Authorization': this.accessToken ? `${this.accessToken}` : undefined,
         accept: ['application/json', 'multipart/form-data'],
       },
       verify:false
