@@ -394,8 +394,9 @@ export default class MonaiServicePanel extends Component {
     }
 
     if (volumeLoadObject) {
+      const { scalarData } = volumeLoadObject;
+
       if (override === true) {
-        const { scalarData } = volumeLoadObject;
         const scalarDataRecover = new Uint8Array(window.ScalarDataBuffer.length);
         scalarDataRecover.set(window.ScalarDataBuffer);
 
@@ -410,7 +411,6 @@ export default class MonaiServicePanel extends Component {
         scalarData.set(scalarDataRecover);
       } else {
 
-        const { scalarData } = volumeLoadObject;
         volumeLoadObject.scalarData = new Uint8Array(convertedData.length);
         // deal with the inconsistent byte length, remove meta info of the bytes
         const startCopyIndex = convertedData.length - scalarData.length

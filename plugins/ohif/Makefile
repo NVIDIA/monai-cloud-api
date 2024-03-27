@@ -13,7 +13,8 @@ dev: prepare
 	cd Viewers; sed -i 's/--max_old_space_size=4096/--max_old_space_size=8192/' ./platform/app/package.json
 
 	@echo "Do patches..."
-	cp patches/Viewers/extensions/cornerstone-dicom-seg/src/panels/PanelSegmentation.tsx Viewers/extensions/cornerstone-dicom-seg/src/panels/PanelSegmentation.tsx
+	cp patches/Viewers/extensions/cornerstone-dicom-seg/src/panels/PanelSegmentation.tsx Viewers/extensions/cornerstone-dicom-seg/src/panels/PanelSegmentation.tsx\
+	cp patches/Viewers/extensions/cornerstone-dicom-seg/src/commandsModule.ts Viewers/extensions/cornerstone-dicom-seg/src/commandsModule.ts
 	cp patches/Viewers/extensions/default/src/Actions/createReportAsync.tsx Viewers/extensions/default/src/Actions/createReportAsync.tsx
 
 	cd Viewers; yarn config set workspaces-experimental true
