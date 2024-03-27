@@ -88,10 +88,10 @@ export default class AutoSegmentation extends BaseTab {
 
     console.log(params);
     const response = await this.props.client().inference(model_id, seriesInstanceUID, params);
-    console.log(response)
+    console.log(response.status)
 
     hideNotification(nid, this.notification);
-    if (response.status >= 400) {
+    if (response.status !== 201) {
       this.notification.show({
         title: 'MONAI Service',
         message: 'Failed to Run Segmentation',

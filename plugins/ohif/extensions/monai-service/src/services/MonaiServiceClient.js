@@ -145,7 +145,7 @@ export default class MonaiServiceClient {
     return axios.post(url, body, {
       responseType: responseType,
       headers: {
-        'Authorization': this.accessToken ? `${this.accessToken}` : undefined,
+        // 'Authorization': this.accessToken ? `${this.accessToken}` : undefined,
         accept: ['application/json', 'multipart/form-data'],
       },
       verify:false
