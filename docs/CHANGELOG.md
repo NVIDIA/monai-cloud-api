@@ -29,5 +29,10 @@
     - The job downloading mechanism is removed from the API.
     - The user can find the job artifacts in the organization's storage bucket.
 
+### Bug Fixes
+- Real-Time Inference supports URL input.
+    - The user can now input the URL of the image to run real-time inference.
+
+
 ### Notes
 - Under the change of organization-based API access control, the users will find datasets visible only to the organization they belong to, and find experiments and jobs visible created by themselves.
