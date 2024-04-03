@@ -33,10 +33,6 @@ export default class MonaiServiceClient {
     this.user_id = window.config.monaiService.userId;
     this.dataset_id = window.config.datasetId ? window.config.datasetId : window.config.monaiService.datasetId;
     this.accessToken = window.config.accessToken ? window.config.accessToken : window.config.monaiService.accessToken;
-    console.log(window.config.accessToken)
-    console.log(window.config.monaiService.accessToken)
-    console.log('init accessToken', this.accessToken)
-    this.accessToken = "eyJraWQiOiJFUkNPOklCWFY6TjY2SDpOUEgyOjNMRlQ6SENVVToyRkFTOkJJTkw6WkxKRDpNWk9ZOkRVN0o6TVlVWSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJ2cjdoNWY3cmllbTgyNjBmaWk2YTVkbDNjMSIsImF1ZCI6Im5nYyIsImFjY2VzcyI6W10sImlzcyI6ImF1dGhuLm52aWRpYS5jb20iLCJvcHRpb25zIjpbXSwiZXhwIjoxNzEyMDc2Mjg5LCJpYXQiOjE3MTIwNzU2ODksImp0aSI6ImVlNGZlOThiLTVkOTktNDVhZC1iZDdlLWQ5MGJkNjVkMDcyNSJ9.U68aoiTOFc4_CFL7CSXb4aTp3p4CDMyxvci9llEc8jAMfC5AEVYRbMwKnpxg9LVOfCBS9s6lnmjb9mRB4x4WrBJuzXol9KH-pTzwFbrV6Xp5WhF7eU79N3nMOUBZ9rNjZhfUwelsZh2IRcEkWS6eYvme_MrrnsaQQWop9tzgaH6GFuB-3lPV86u_1EvCBiN7Jj7ge6xO680dRHzAuDh8AxaYHHR-g58K0AeVJnvs2aUWRQIuHSMGJgfUGQS_ikF6SyQRmHHx_sTqNuaDUOig_36PCmx2z42y1rWiMwbDF8O_LkVKsNN1s2eaAR-EcO8RI-SmRHFa-6CeZWhtQ52rwtVpy-padoekEoVrJ7k8vqR_QJcPKfHwT1Pi73NmfYcTigrYdysKtEgWOMXOoiQocWpRl7_QvcY0yMG-ZjSCKZnEbBN09N-JGFsy2r3c_l1Yg04opgUxVII_5T66HDbUbnSTzwvVNC_ocksntOZChctZB1FiylYRg5DWfN0X8cFt0TkLbT7FngvaYzmhSsupZX9KpzDgj6jXOlOLQhVEtBLCzePOb-LWKxVGp1SYHytkfwQC73hL4c1H2zGGti63jEzycORwjgAJTXp5ZJgGRPRUMoiUvc3yNgwLtzSM6ua2cUf36vMXrsOiYwsY0osRi9fSn9XCQsbOqJO8J99YM60"
     // this.base_url = `${this.api_endpoint}/users/${this.user_id}`;
     this.base_url = `${this.api_endpoint}/orgs/iasixjqzw1hj`;
 
@@ -111,7 +107,6 @@ export default class MonaiServiceClient {
 
   api_get(url) {
     console.debug('GET:: ' + url);
-    console.log(this.accessToken)
     if (this.accessToken) {
       axios.defaults.headers.common['Authorization'] = this.accessToken;
     }
@@ -135,7 +130,6 @@ export default class MonaiServiceClient {
 
   api_post(url, body, responseType = 'json') {
     console.log('POST URL', url)
-    console.log(this.accessToken)
 
     if (this.accessToken) {
       axios.defaults.headers.common['Authorization'] = this.accessToken;
@@ -145,7 +139,7 @@ export default class MonaiServiceClient {
     return axios.post(url, body, {
       responseType: responseType,
       headers: {
-        // 'Authorization': this.accessToken ? `${this.accessToken}` : undefined,
+        'Authorization': this.accessToken ? `${this.accessToken}` : undefined,
         accept: ['application/json', 'multipart/form-data'],
       },
       verify:false

@@ -205,6 +205,7 @@ export default class MonaiServicePanel extends Component {
     //   initialSegs = currentSegs[0].segments;
 
     // } 
+
     this.initSegVolume = [{
       id: 'monaiservice',
       label: 'Segmentations',
@@ -217,12 +218,14 @@ export default class MonaiServicePanel extends Component {
       activeSegmentIndex: 1,
     }];
     initialSegs = this.initSegVolume[0].segments;
+    console.log("hey 1 !!!!!!!!!!!!!", initialSegs)
     const volumeLoadObject = cache.getVolume('monaiservice');
 
     console.log('volumeLoadObject', volumeLoadObject)
     if (!volumeLoadObject) {
       this.props.commandsManager.runCommand('loadSegmentationsForViewport', { segmentations: this.initSegVolume });
     }
+
     console.log('volumeLoadObject 2', volumeLoadObject)
 
     // const datasets = await this.client().list_datasets();
@@ -321,8 +324,6 @@ export default class MonaiServicePanel extends Component {
     const boundaryMatch = contentType.match(/boundary=([^;]+)/i);
     const boundary = boundaryMatch ? boundaryMatch[1] : null;
 
-
-
     const text = new TextDecoder().decode(buffer);
     const parts = text
       .split(`--${boundary}`)
@@ -382,6 +383,9 @@ export default class MonaiServicePanel extends Component {
       modelToSegMapping[model_idx] = 0xFF & seg_idx;
     }
     const convertedData = new Uint8Array(ret.image);
+    // const uniqueValues = new Set(convertedData);
+    // const uniqueArray = Array.from(uniqueValues);
+    // console.log(uniqueArray);
     const volumeLoadObject = cache.getVolume('monaiservice');
 
     // Model Idx to Segment Idx conversion (merge for multiple models with different label idx for the same name)
@@ -391,6 +395,7 @@ export default class MonaiServicePanel extends Component {
       if (midx && sidx) {
         convertedData[i] = sidx;
       }
+      // Additional condition to set value to 0 if it's 253
     }
 
     if (volumeLoadObject) {
@@ -401,20 +406,35 @@ export default class MonaiServicePanel extends Component {
         scalarDataRecover.set(window.ScalarDataBuffer);
 
         // get unique values to determin which organs to update, keep rest
-        const updateTargets = new Set(convertedData);
 
-        for (let i = 0; i < convertedData.length; i++) {
-          if (convertedData[i] !== 255 && updateTargets.has(scalarDataRecover[i])) {
-            scalarDataRecover[i] = convertedData[i];
+        const startCopyIndex = convertedData.length - scalarData.length
+        const decodeData = convertedData.subarray(startCopyIndex, startCopyIndex + scalarData.length)
+        const updateTargets = new Set(decodeData);
+
+        for (let i = 0; i < decodeData.length; i++) {
+          if (decodeData[i] !== 253 && updateTargets.has(scalarDataRecover[i])) {
+            scalarDataRecover[i] = decodeData[i];
           }
         }
+
         scalarData.set(scalarDataRecover);
       } else {
 
-        volumeLoadObject.scalarData = new Uint8Array(convertedData.length);
-        // deal with the inconsistent byte length, remove meta info of the bytes
+        
         const startCopyIndex = convertedData.length - scalarData.length
-        scalarData.set(convertedData.subarray(startCopyIndex, startCopyIndex + scalarData.length));
+        const decodeData = convertedData.subarray(startCopyIndex, startCopyIndex + scalarData.length)
+
+        for (let i = 0; i < decodeData.length; i++) {
+          if (decodeData[i] === 253) {
+            decodeData[i] = 0;
+          }
+        }
+        // const setArray = convertedData.subarray(startCopyIndex, startCopyIndex + scalarData.length)
+        // const uniqueValues = new Set(setArray);
+        // const uniqueArray = Array.from(uniqueValues);
+        // console.log(uniqueArray);
+
+        scalarData.set(decodeData);
 
       }
 
@@ -452,7 +472,7 @@ export default class MonaiServicePanel extends Component {
       <div className='monaiServicePanel'>
         <br style={{ margin: '3px'}} />
         <hr className='separator' />
-        <p className='subtitle'>MONAI Service Ver. 0.0.2-beta6</p>
+        <p className='subtitle'>MONAI Service Ver. 0.0.7-beta6</p>
         <div className='tabs scrollbar' id='style-3'>
           <ActiveLearning
             ref={this.actions['activelearning']}

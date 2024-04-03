@@ -27,22 +27,26 @@ async function createReportAsync({ servicesManager, getReport, reportType = 'mea
 
     uiNotificationService.show({
       title: 'Create Report',
-      message: `${reportType} saved successfully !!!`,
+      message: `${reportType} saved successfully`,
       type: 'success',
     });
 
     return [displaySetInstanceUID];
   } catch (error) {
-    // uiNotificationService.show({
-    //   title: 'Create Report',
-    //   message: error.message || `Failed to store ${reportType}`,
-    //   type: 'error',
-    // });
-    uiNotificationService.show({
-      title: 'Create Report',
-      message: `Cancel segmentation store`,
-      type: 'error',
-    });
+    console.log("error:", error)
+    if (error instanceof TypeError && error.message.includes("'StudyInstanceUID' of 'instances[0]' as it is undefined")) {
+      uiNotificationService.show({
+        title: 'Create Report',
+        message: `Cancel segmentation export`,
+        type: 'error',
+      });
+    } else {
+      uiNotificationService.show({
+        title: 'Create Report',
+        message: error.message || `Failed to store ${reportType}`,
+        type: 'error',
+      });
+    }
   } finally {
     uiDialogService.dismiss({ id: loadingDialogId });
   }
