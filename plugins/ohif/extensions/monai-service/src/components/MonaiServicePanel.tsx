@@ -145,7 +145,7 @@ export default class MonaiServicePanel extends Component {
     // Cache this series at MONAI Service (This can be moved to when you load the series)
     await this.client().cache_image(this.SeriesInstanceUID);
 
-    const models = response.data;
+    const models = response.data.experiments;
     const dataset_id = window.config.datasetId ? window.config.datasetId : window.config.monaiService.datasetId;
     console.log(models)
     const filtered = models.filter((model) => (
