@@ -82,3 +82,36 @@ sudo wget https://lsb.orthanc-server.com/plugin-dicom-web/1.6/libOrthancDicomWeb
 
 sudo service orthanc restart
 ```
+
+### Unit Tests
+#### Setup 
+
+The test pipeline for Javascript is configured in JEST and NPM. 
+Add more unit tests, create *.test.js file under `__tests__` folder.
+Here are steps to setup test ENV:
+
+##### Install Jest
+
+```bash
+npm install --save-dev jest
+npm install --save-dev jest-environment-jsdom --legacy-peer-deps
+
+```
+
+##### Configure Jest
+
+```
+"scripts": {
+  "test": "jest"
+},
+"jest": {
+  "verbose": true,
+  "testEnvironment": "jsdom"
+}
+```
+
+##### Run Tests
+
+```bash
+npm test
+```
