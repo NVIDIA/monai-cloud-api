@@ -1,6 +1,12 @@
+# Introduction to NVIDIA MONAI Cloud APIs
+
 The NVIDIA MONAI Cloud APIs offer a comprehensive suite of tools designed to enhance workflows in medical imaging through interactive annotation, training, and inference. Here's an overview of their key features and how to get started:
 
-### Key Features
+## What are NVIDIA MONAI Cloud APIs?
+
+NVIDIA MONAI Cloud APIs is an NVIDIA-managed solution, focusing on making the medical imaging lifecycle easier with service integration from annotation, to training, to inference. With a foundation in the [MONAI ecosystem](https://monai.io/), these APIs offer a seamless interface to researchers and data scientists aiming to deploy, manage, and refine AI models in medical imaging applications.
+
+## Key Features
 
 1. **Interactive AI Annotation**: 
    - Utilizes the VISTA-3D foundation model.
