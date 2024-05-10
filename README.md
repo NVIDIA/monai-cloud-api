@@ -17,7 +17,7 @@ NVIDIA MONAI Cloud APIs is an NVIDIA-managed solution, focusing on making the me
    - Implements best practices to deliver state-of-the-art segmentation performance
 
 3. **VISTA-3D Model**:
-   - A robust foundation model, trained on 117 classes encompassing various organs and tumors.
+   - A robust foundation model, trained on 132 classes encompassing various organs and tumors.
    - The model's training and validation involved CT images from over 4,000 patients, ensuring its high accuracy and reliability for medical image analysis.
 
 4. **VISTA-2D Model**:
