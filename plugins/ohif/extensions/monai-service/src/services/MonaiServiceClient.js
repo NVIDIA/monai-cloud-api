@@ -32,8 +32,10 @@ export default class MonaiServiceClient {
     this.api_endpoint = window.config.monaiService.server;
     this.user_id = window.config.monaiService.userId;
     this.dataset_id = window.config.datasetId ? window.config.datasetId : window.config.monaiService.datasetId;
-    this.accessToken = window.config.accessToken;
-    this.base_url = `${this.api_endpoint}/users/${this.user_id}`;
+    this.accessToken = window.config.accessToken ? window.config.accessToken : window.config.monaiService.accessToken;
+    // this.base_url = `${this.api_endpoint}/users/${this.user_id}`;
+    this.base_url = `${this.api_endpoint}/orgs/iasixjqzw1hj`;
+
     console.log('this base url', this.base_url)
   }
 
@@ -90,10 +92,10 @@ export default class MonaiServiceClient {
       'bundle_params': params,
     };
     const data = {"action": "inference", "specs": inference_specs}
-    console.log(data);
+    console.log('data', data);
     // cache the current annotation in case of recovery loop
     const segVolumeObject = cache.getVolume('monaiservice');
-    console.log(segVolumeObject)
+    console.log('segVolumeObject', segVolumeObject)
     if (segVolumeObject && segVolumeObject.hasOwnProperty('scalarData')) {
       // The 'segVolumeObject' exists and has the 'scalarData' property
       const currentSegArray = new Uint8Array(segVolumeObject.scalarData.length);
@@ -111,7 +113,7 @@ export default class MonaiServiceClient {
     
     return axios.get(url,{
       headers: {
-      'Authorization': this.accessToken ? `Bearer ${this.accessToken}` : undefined,
+      'Authorization': this.accessToken ? `${this.accessToken}` : undefined,
       },
       verify: false
       })
@@ -128,6 +130,7 @@ export default class MonaiServiceClient {
 
   api_post(url, body, responseType = 'json') {
     console.log('POST URL', url)
+
     if (this.accessToken) {
       axios.defaults.headers.common['Authorization'] = this.accessToken;
     }
@@ -136,6 +139,7 @@ export default class MonaiServiceClient {
     return axios.post(url, body, {
       responseType: responseType,
       headers: {
+        'Authorization': this.accessToken ? `${this.accessToken}` : undefined,
         accept: ['application/json', 'multipart/form-data'],
       },
       verify:false

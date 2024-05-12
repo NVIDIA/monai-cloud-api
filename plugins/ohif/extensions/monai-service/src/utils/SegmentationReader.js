@@ -20,7 +20,8 @@ import pako from 'pako';
 
 export default class SegmentationReader {
   static parseNrrdData(data) {
-    let nrrdfile = nrrd.parse(data);
+    // let nrrdfile = nrrd.parse(data);
+    let nrrdfile = data;
 
     // Currently gzip is not supported in nrrd.js
     if (nrrdfile.encoding === 'gzip') {
@@ -31,7 +32,9 @@ export default class SegmentationReader {
       nrrdfile.buffer = buffer;
     }
 
-    const image = nrrdfile.buffer;
+    // const image = nrrdfile.buffer;
+    const image = nrrdfile;
+
     const header = nrrdfile;
     delete header.data;
     delete header.buffer;

@@ -1,5 +1,5 @@
 {
-  "MONAI_SERVICE_API_ENDPOINT": "api-ea2.tao.stg.ngc.nvidia.com:443",
+  "MONAI_SERVICE_API_ENDPOINT": "api-ea4.tao.stg.ngc.nvidia.com:443",
   "MONAI_SERVICE_USER_ID": "f07a7e8b-4a81-51f0-8170-8544f77d85b3",
   "MONAI_SERVICE_DATASET_ID": "",
   "MONAI_SERVICE_ACCESS_TOKEN": ""

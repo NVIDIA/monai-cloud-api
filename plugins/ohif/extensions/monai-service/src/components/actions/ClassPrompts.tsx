@@ -117,6 +117,15 @@ export default class ClassPrompts extends BaseTab {
       'label_prompt': label_classes,
     };
     console.log(params);
+    if (!params.label_prompt.length) {
+      this.notification.show({
+        title: 'MONAI Service',
+        message: 'Label Prompt is empty. Cannot run inference.',
+        type: 'error',
+        duration: 6000,
+      });
+      return; // Stop
+    }
 
     const nid = this.notification.show({
       title: 'MONAI Service',
