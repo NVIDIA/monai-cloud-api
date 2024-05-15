@@ -210,10 +210,10 @@ export default function PanelSegmentation({
       // to re-read the measurements in a SR read only viewport
       segmentationService.remove(segmentationId);
 
-      // viewportGridService.setDisplaySetsForViewport({
-      //   viewportId: viewportGridService.getActiveViewportId(),
-      //   displaySetInstanceUIDs,
-      // });
+      viewportGridService.setDisplaySetsForViewport({
+        viewportId: viewportGridService.getActiveViewportId(),
+        displaySetInstanceUIDs,
+      });
     }
   };
 
