@@ -25,7 +25,7 @@ NVIDIA MONAI Cloud APIs is an NVIDIA-managed solution, focusing on making the me
    - Built on the flexible Meta SAM architecture and adapted for cell imaging, VISTA-2D outperforms the current leading model, Cellpose 2.0. It can be fine-tuned on customer-specific data to deliver unparalleled accuracy in segmenting cells and employs a more generalized approach that adapts more easily to different cell types.
 
 5. **MAISI Model**
-   - The Synthetic Data Generation Model is an advanced generative AI model that creates high-quality 3D CT images with or without anatomical annotations.
+   - The MAISI model is an advanced generative AI model that creates high-quality 3D CT images with or without anatomical annotations.
    - It generates high-resolution images (512 × 512 × 512) with a voxel size of 1.0 × 1.0 × 1.0 mm³ and supports up to 132 anatomical classes, including organs and tumors.
    - This model excels in data augmentation, creating realistic medical imaging data to supplement limited datasets due to privacy concerns or rare conditions.
 
